@@ -2,45 +2,51 @@
 import { useState } from "react";
 
 const categories = [
-  { label: "History", count: 2841, color: "bg-gray-100 text-gray-700" },
-  { label: "Colors", count: 89, color: "bg-blue-100 text-blue-700" },
-  { label: "Assets", count: 204, color: "bg-purple-100 text-purple-700" },
-  { label: "Prompts", count: 67, color: "bg-amber-100 text-amber-700" },
-  { label: "Inspirations", count: 143, color: "bg-pink-100 text-pink-700" },
+  { label: "Philosophy", count: 432, color: "bg-amber-950/60 text-amber-400 border border-amber-500/20" },
+  { label: "Science", count: 289, color: "bg-indigo-950/60 text-indigo-300 border border-indigo-500/20" },
+  { label: "Literature", count: 561, color: "bg-emerald-950/60 text-emerald-400 border border-emerald-500/20" },
+  { label: "History", count: 198, color: "bg-purple-950/60 text-purple-300 border border-purple-500/20" },
+  { label: "Technology", count: 334, color: "bg-sky-950/60 text-sky-300 border border-sky-500/20" },
 ];
 
-const appFilters = ["All", "Safari", "Figma", "Slack", "Xcode", "Mail"];
-const typeFilters = ["text", "links", "screenshots", "images", "files", "code", "colors"];
+const disciplineFilters = ["All", "Philosophy", "Science", "Literature", "History", "Technology"];
+const typeFilters = ["quotes", "concepts", "insights", "book notes", "mental models", "aphorisms"];
 
-const mockClips = [
-  { type: "color", content: "#2563EB", color: "#2563EB", app: "Figma" },
-  { type: "color", content: "#7C3AED", color: "#7C3AED", app: "Figma" },
-  { type: "color", content: "#10B981", color: "#10B981", app: "Figma" },
-  { type: "color", content: "#F59E0B", color: "#F59E0B", app: "Figma" },
-  { type: "color", content: "#EF4444", color: "#EF4444", app: "Figma" },
-  { type: "color", content: "#EC4899", color: "#EC4899", app: "Figma" },
-  { type: "text", content: "Meeting at 3pm — board room", app: "Slack" },
-  { type: "code", content: "const [state, setState] = useState(null)", app: "VS Code" },
-  { type: "link", content: "dribbble.com/shots/2489…", app: "Safari" },
-  { type: "text", content: "Q4 Revenue: $2.4M ↑34%", app: "Notion" },
-  { type: "image", content: "screenshot.png", app: "Screenshot" },
-  { type: "code", content: "SELECT * FROM users WHERE active = true", app: "TablePlus" },
+const mockEntries = [
+  { type: "quote", content: "Know thyself.", source: "Socrates", category: "Philosophy", color: "from-amber-500/20 border-amber-500/20 text-amber-300" },
+  { type: "insight", content: "The art of medicine consists in amusing the patient while nature cures the disease.", source: "Voltaire", category: "Philosophy", color: "from-indigo-500/20 border-indigo-500/20 text-indigo-300" },
+  { type: "concept", content: "What is not started today is never finished tomorrow.", source: "Goethe", category: "Literature", color: "from-emerald-500/20 border-emerald-500/20 text-emerald-300" },
+  { type: "quote", content: "In the middle of every difficulty lies opportunity.", source: "Einstein", category: "Science", color: "from-sky-500/20 border-sky-500/20 text-sky-300" },
+  { type: "insight", content: "Those who cannot remember the past are condemned to repeat it.", source: "Santayana", category: "History", color: "from-purple-500/20 border-purple-500/20 text-purple-300" },
+  { type: "concept", content: "Be the change you wish to see in the world.", source: "Gandhi", category: "Philosophy", color: "from-amber-500/20 border-amber-500/20 text-amber-300" },
+  { type: "quote", content: "Two roads diverged in a wood, and I — I took the one less traveled by.", source: "Frost", category: "Literature", color: "from-emerald-500/20 border-emerald-500/20 text-emerald-300" },
+  { type: "insight", content: "The measure of intelligence is the ability to change.", source: "Einstein", category: "Science", color: "from-sky-500/20 border-sky-500/20 text-sky-300" },
+  { type: "concept", content: "It does not matter how slowly you go as long as you do not stop.", source: "Confucius", category: "Philosophy", color: "from-amber-500/20 border-amber-500/20 text-amber-300" },
+  { type: "quote", content: "Simplicity is the ultimate sophistication.", source: "Da Vinci", category: "Technology", color: "from-indigo-500/20 border-indigo-500/20 text-indigo-300" },
+  { type: "insight", content: "The only true wisdom is knowing you know nothing.", source: "Socrates", category: "Philosophy", color: "from-amber-500/20 border-amber-500/20 text-amber-300" },
+  { type: "concept", content: "Not all those who wander are lost.", source: "Tolkien", category: "Literature", color: "from-emerald-500/20 border-emerald-500/20 text-emerald-300" },
 ];
 
 export default function Organization() {
-  const [activeApp, setActiveApp] = useState("All");
+  const [activeDiscipline, setActiveDiscipline] = useState("All");
   const [activeType, setActiveType] = useState("");
 
+  const filtered = mockEntries.filter(e =>
+    (activeDiscipline === "All" || e.category === activeDiscipline) &&
+    (activeType === "" || e.type === activeType)
+  );
+
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-[#060818]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-3">Organization</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
-            Organized your way
+          <p className="text-sm font-semibold text-amber-400/80 uppercase tracking-widest mb-3">Organisation</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <span className="text-white">Organised your</span>{" "}
+            <span className="bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">way</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Create custom categories, filter by app or content type, and find anything in seconds.
+          <p className="text-lg text-indigo-200/50 max-w-2xl mx-auto">
+            Create custom disciplines, filter by thinker or content type, and surface any piece of wisdom in seconds.
           </p>
         </div>
 
@@ -52,42 +58,42 @@ export default function Organization() {
               <span className="opacity-60 text-xs font-normal">{cat.count}</span>
             </div>
           ))}
-          <div className="bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl px-5 py-3 text-sm font-medium text-gray-400 flex items-center gap-1.5">
+          <div className="bg-white/5 border-2 border-dashed border-indigo-500/20 rounded-2xl px-5 py-3 text-sm font-medium text-indigo-400/40 flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
-            New category
+            New discipline
           </div>
         </div>
 
         {/* Filter bar */}
-        <div className="bg-gray-50 rounded-2xl p-6 mb-8">
+        <div className="bg-[#0d1117] border border-indigo-500/15 rounded-2xl p-6 mb-8">
           <div className="flex flex-wrap gap-2 mb-4">
-            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider self-center mr-2">By App:</span>
-            {appFilters.map((app) => (
+            <span className="text-xs font-semibold text-indigo-400/40 uppercase tracking-wider self-center mr-2">By Discipline:</span>
+            {disciplineFilters.map((d) => (
               <button
-                key={app}
-                onClick={() => setActiveApp(app)}
+                key={d}
+                onClick={() => setActiveDiscipline(d)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  activeApp === app
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                  activeDiscipline === d
+                    ? "bg-amber-400 text-gray-900 shadow-sm"
+                    : "bg-white/5 border border-white/10 text-indigo-300/60 hover:border-indigo-400/30"
                 }`}
               >
-                {app}
+                {d}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider self-center mr-2">By Type:</span>
+            <span className="text-xs font-semibold text-indigo-400/40 uppercase tracking-wider self-center mr-2">By Type:</span>
             {typeFilters.map((type) => (
               <button
                 key={type}
                 onClick={() => setActiveType(activeType === type ? "" : type)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                   activeType === type
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                    ? "bg-amber-400 text-gray-900 shadow-sm"
+                    : "bg-white/5 border border-white/10 text-indigo-300/60 hover:border-indigo-400/30"
                 }`}
               >
                 {type}
@@ -96,42 +102,25 @@ export default function Organization() {
           </div>
         </div>
 
-        {/* Grid of clips */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          {mockClips.map((clip, i) => (
+        {/* Grid of wisdom entries */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {(filtered.length ? filtered : mockEntries).map((entry, i) => (
             <div
               key={i}
-              className="bg-white border border-gray-100 rounded-2xl p-3 hover:border-blue-200 hover:shadow-md transition-all cursor-pointer group"
+              className={`bg-gradient-to-br ${entry.color.split(' ')[0]} border ${entry.color.split(' ')[1]} rounded-2xl p-4 hover:scale-[1.02] transition-all cursor-pointer group`}
             >
-              {clip.type === "color" ? (
-                <div className="mb-2">
-                  <div
-                    className="w-full aspect-square rounded-xl shadow-sm mb-2"
-                    style={{ backgroundColor: clip.color }}
-                  />
-                  <p className="text-xs font-mono text-gray-600 truncate">{clip.content}</p>
-                </div>
-              ) : clip.type === "image" ? (
-                <div className="mb-2">
-                  <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-blue-100 mb-2 flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <rect x="2" y="3" width="16" height="12" rx="2" stroke="#A78BFA" strokeWidth="1.5"/>
-                      <path d="M2 12l4-4 3 3 4-5 5 6" stroke="#A78BFA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <p className="text-xs text-gray-500 truncate">{clip.content}</p>
-                </div>
-              ) : (
-                <div className="mb-2">
-                  <div className="w-full aspect-square rounded-xl bg-gray-50 mb-2 flex items-center justify-center overflow-hidden p-2">
-                    <p className="text-xs text-gray-500 font-mono leading-relaxed line-clamp-4 text-center break-all">{clip.content}</p>
-                  </div>
-                  <p className="text-xs text-gray-400 truncate">{clip.app}</p>
-                </div>
-              )}
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <button className="w-full text-xs bg-blue-600 text-white rounded-lg py-1 font-medium">
-                  Paste
+              <div className="mb-3">
+                <span className={`text-xs font-semibold uppercase tracking-wider ${entry.color.split(' ')[2]} opacity-60`}>
+                  {entry.type}
+                </span>
+              </div>
+              <p className="text-xs text-white/80 leading-relaxed italic mb-3 line-clamp-3">
+                &ldquo;{entry.content}&rdquo;
+              </p>
+              <p className="text-xs text-indigo-300/40">— {entry.source}</p>
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity mt-3">
+                <button className={`w-full text-xs py-1.5 rounded-lg font-medium ${entry.color.split(' ')[2]} bg-white/10`}>
+                  Recall
                 </button>
               </div>
             </div>
