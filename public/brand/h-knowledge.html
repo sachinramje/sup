@@ -1,0 +1,613 @@
+<title>HyperVisuals — An H That Knows Something</title>
+<style>
+:root{
+  --ink:#15181C; --ink-soft:#4E555C;
+  --paper:#E6E7E3; --plate:#F0F1EE;
+  --rule:#C8CBC5; --rule-soft:#D8DBD5;
+  --volt:#CCFF00; --volt-ink:#0C0E10;
+  --stone:#1B1E22; --stone-mark:#E8E6DE;
+  --accent:#8FB300;
+  --shadow:0 1px 0 #FFFFFF80, 0 14px 30px -24px #15181C99;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8E958D;--paper:#0E1113;--plate:#171A1D;
+    --rule:#2D3339;--rule-soft:#242A30;--accent:#CCFF00;
+    --shadow:0 1px 0 #FFFFFF08, 0 14px 30px -24px #000;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8E958D;--paper:#0E1113;--plate:#171A1D;
+  --rule:#2D3339;--rule-soft:#242A30;--accent:#CCFF00;
+  --shadow:0 1px 0 #FFFFFF08, 0 14px 30px -24px #000;}
+:root[data-theme="light"]{--ink:#15181C;--ink-soft:#4E555C;--paper:#E6E7E3;--plate:#F0F1EE;
+  --rule:#C8CBC5;--rule-soft:#D8DBD5;--accent:#8FB300;
+  --shadow:0 1px 0 #FFFFFF80, 0 14px 30px -24px #15181C99;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:34px}
+.slug{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px;align-items:center}
+.slug span{background:var(--volt);color:var(--volt-ink);padding:4px 9px;border-radius:1px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,58px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+.callout{border-left:3px solid var(--volt);padding:18px 22px;margin:0 0 30px;max-width:66ch;
+  background:color-mix(in srgb,var(--volt) 8%,transparent)}
+.callout p{margin:0 0 12px}.callout p:last-child{margin:0}
+.callout strong{font-weight:600}
+.answer{border:1px solid var(--rule);border-radius:2px;padding:22px 24px;margin:0 0 44px;max-width:66ch}
+.answer h3{font-family:var(--display);text-transform:uppercase;font-size:14px;
+  letter-spacing:.02em;margin:0 0 12px}
+.answer p{margin:0 0 12px}.answer p:last-child{margin:0}
+.answer dl{margin:14px 0 0;display:grid;gap:10px}
+.answer dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent)}
+.answer dd{margin:2px 0 0;font-size:15.5px}
+
+.hero{background:var(--volt);border-radius:2px;padding:clamp(24px,5vw,56px);
+  margin-bottom:clamp(48px,8vw,80px);display:grid;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1.1fr);gap:clamp(24px,5vw,52px);align-items:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.hero-mark svg{display:block;width:100%;height:auto;color:var(--volt-ink)}
+.hero-side .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--volt-ink);opacity:.6;margin:0 0 14px}
+.hero-side h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(22px,3.6vw,34px);letter-spacing:-.025em;line-height:1.02;
+  margin:0 0 16px;color:var(--volt-ink)}
+.hero-side p{margin:0 0 14px;color:var(--volt-ink);opacity:.78;font-size:16px;max-width:40ch}
+.hero-side p:last-child{margin:0}
+.hero-side strong{opacity:1;font-weight:600}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:12px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:52px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.bar label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;color:var(--ink-soft)}
+.bar input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
+.bar button{font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:5px 12px;border-radius:2px;
+  transition:border-color .15s,color .15s}
+.bar button:hover{border-color:var(--accent);color:var(--accent)}
+.bar .spacer{flex:1}
+
+.plate{margin-bottom:clamp(56px,9vw,100px)}
+.plate-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px}
+.idx{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  background:var(--volt);color:var(--volt-ink);padding:3px 7px;border-radius:1px}
+.plate-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,30px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(270px,.92fr) minmax(300px,1.08fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.field{border-radius:2px;padding:clamp(22px,4vw,44px);box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center}
+.field svg{display:block;width:100%;max-width:260px;height:auto}
+.dims{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 18px;font-variant-numeric:tabular-nums}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}.lede strong{font-weight:600}
+.reads{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:3px solid var(--volt);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9}
+.reads b{color:var(--ink);font-weight:400}
+
+.knobs{margin-top:24px;display:grid;gap:14px}
+.knob{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+.knob .k-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.knob .k-val{font-family:var(--mono);font-size:10.5px;color:var(--accent);font-variant-numeric:tabular-nums}
+.knob input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--accent);height:18px;cursor:pointer}
+
+.scale{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.scale figure{margin:0;display:grid;justify-items:center;gap:7px}
+.scale .sq{border-radius:2px;display:flex;align-items:center;justify-content:center}
+.scale svg{display:block}
+.scale figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+.panel{border-top:1.5px solid var(--ink);padding-top:26px;margin-bottom:clamp(48px,8vw,84px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 14px}
+.panel > p{max-width:60ch;margin:0 0 26px}
+.chooser{display:flex;flex-wrap:wrap;border:1px solid var(--rule);border-radius:2px;
+  overflow:hidden;margin-bottom:30px;max-width:430px}
+.chooser button{flex:1;min-width:100px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 6px;background:none;border:none;
+  border-right:1px solid var(--rule);color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.chooser button:last-child{border-right:none}
+.chooser button[aria-pressed="true"]{background:var(--volt);color:var(--volt-ink)}
+
+.compare{display:flex;flex-wrap:wrap;gap:18px}
+.compare figure{margin:0;display:grid;gap:9px;justify-items:center}
+.compare .c{border-radius:2px;padding:18px 22px}
+.compare svg{display:block}
+.compare figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.family{border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px);
+  padding:clamp(16px,3vw,24px) clamp(16px,3vw,26px);border-bottom:1px solid var(--rule)}
+.lock:last-child{border-bottom:none}
+.lock svg{display:block;flex:none}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,3vw,27px);letter-spacing:-.02em;line-height:1}
+.lock .wm .sl{font-weight:400;padding:0 .06em;opacity:.45}
+.lock .wm .sub{opacity:.55}
+.lock .desc{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.5;text-align:right;line-height:1.7}
+@media (max-width:620px){.lock .desc{display:none}}
+
+.tiles{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end}
+.tiles figure{margin:0;display:grid;justify-items:center;gap:9px}
+.tiles .tile{border-radius:16%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tiles svg{display:block}
+.tiles figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 18px}
+.verdict p{max-width:58ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--volt-ink);background:var(--volt);
+  padding:5px 11px;border-radius:1px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.next{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.next ol{margin:0;padding-left:20px;max-width:56ch}
+.next li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Round 07 — the H, carrying an idea</span>
+    </div>
+    <h1>An H that<br>knows something<em>.</em></h1>
+    <p class="standfirst">Every H I've drawn so far has been two posts and a bar with a different haircut. None of them said anything. These three each carry a knowledge idea inside the letter's own anatomy — not applied to it, built from it.</p>
+  </header>
+
+  <div class="callout">
+    <p><strong>First, the honest problem with last round.</strong></p>
+    <p>I built your H faithfully to that reference sheet, and faithful was the mistake. That 45° chunk-and-facet language is <em>gaming and esports</em> — it's the visual dialect of teams, tournaments and energy drinks. Beautifully made, but it reads as fast and loud, which is the exact opposite of what you're selling.</p>
+    <p>So I've kept the part of it that's genuinely yours — <strong>the precision of the 45° cut</strong> — and thrown out the part that isn't: the squat, heavy, square proportions. These are drawn at a real letter's proportion, 76 wide to 100 tall. That single change does most of the work.</p>
+  </div>
+
+  <div class="answer">
+    <h3>Your question: wordmark or symbol?</h3>
+    <p>You don't have to choose — that's a master-brand structure, and it has a standard shape. You need both, doing different jobs.</p>
+    <dl>
+      <div><dt>The H — symbol</dt><dd>Avatars, app icons, favicons, merchandise, the stamp on every visual you ship. It's what rolls every Hyper brand into one asset.</dd></div>
+      <div><dt>HyperVisuals — wordmark</dt><dd>Anywhere you're being introduced: the site header, a deck cover, an invoice, a contract. Words do the introducing; symbols only work once people already know you.</dd></div>
+      <div><dt>H + Hyper/Pod — lockup</dt><dd>The two together, in a fixed relationship. This is what a sub-brand actually uses day to day.</dd></div>
+    </dl>
+    <p style="margin-top:14px">The rule that keeps it honest: <strong>the symbol never appears alone until the wordmark has earned it.</strong> For the first year or two, lock them together almost everywhere.</p>
+  </div>
+
+  <div class="hero">
+    <div class="hero-mark"><svg id="hero" fill="none" aria-label="Codex H"></svg></div>
+    <div class="hero-side">
+      <p class="eyebrow">The recommendation — Codex H</p>
+      <h2>A column, a stack of pages, an archive</h2>
+      <p>The piers are <strong>fluted</strong> — incised with fine vertical channels, the way a classical column is. That one device reads three ways at once, and all three are yours.</p>
+      <p>A fluted column is the oldest signal of learning there is: the portico, the library, the academy. Seen flatter, those same lines are a stack of pages viewed edge-on. Flatter still, they're lines of text.</p>
+      <p>And the crossbar stays solid. <strong>Many sources, one connection</strong> — which is the entire business, stated in geometry rather than in a tagline.</p>
+    </div>
+  </div>
+
+  <div class="bar">
+    <label><input type="checkbox" id="quiet"> Quiet colourway</label>
+    <label><input type="checkbox" id="constr"> Show construction</label>
+    <span class="spacer"></span>
+    <button id="reset" type="button">Reset all</button>
+  </div>
+
+  <!-- 01 CODEX -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">01</span><h2>Codex H</h2>
+      <span class="axis">Idea — the archive</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-codex"><svg id="svg-codex" fill="none" aria-label="Codex H"></svg></div>
+        <div class="dims" id="dims-codex"></div>
+        <div class="knobs" id="knobs-codex"></div>
+        <div class="scale" id="scale-codex"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Fluted piers</b> — column, pages, lines of text<br><b>Solid crossbar</b> — the one connection<br><b>45° terminals</b> — cut, not drafted</p>
+        <p class="lede">Nobody is doing fluting. <strong>That's the entire opportunity.</strong></p>
+        <p>Every modern monogram is either a solid slab or a monoline stroke. Incised channels sit in neither camp — they belong to architecture and to books, which is precisely the territory you're claiming and precisely where no tech brand is looking.</p>
+        <p>It also solves something none of my earlier marks did: it gives you a <em>texture</em>. That flute rhythm extends to a pattern, a divider, a lower-third, a book edge on a cover — an identity element that isn't the logo but is unmistakably from the same hand.</p>
+        <p>Keep the channels fine. At two or three units they read as incision; much wider and the pier falls apart into a fence. The small-size cut fills them in entirely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 SPAN -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">02</span><h2>Span H</h2>
+      <span class="axis">Idea — the connection</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-span"><svg id="svg-span" fill="none" aria-label="Span H"></svg></div>
+        <div class="dims" id="dims-span"></div>
+        <div class="knobs" id="knobs-span"></div>
+        <div class="scale" id="scale-span"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Two unequal piers</b> — two unlike things<br><b>One bar</b> — the only reason they're a letter</p>
+        <p class="lede">An H is two separate uprights that <strong>only become a letter because something joins them.</strong></p>
+        <p>That is what an insight is. Two things nobody had put together, and the connection between them. The letter was already carrying the idea; it just needed to stop hiding it.</p>
+        <p>So the piers are deliberately unequal — heavy on the left, light on the right — because equal piers read as symmetry and symmetry reads as decoration. Unequal, they read as two <em>different</em> things, held. And the bar overshoots the lighter pier: the connection outlives what it connected.</p>
+        <p>The most conceptually exact of the three and the quietest. If you want a mark that rewards being explained once and then never needs explaining again, this is it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 RULED -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">03</span><h2>Ruled H</h2>
+      <span class="axis">Idea — the line you read along</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-ruled"><svg id="svg-ruled" fill="none" aria-label="Ruled H"></svg></div>
+        <div class="dims" id="dims-ruled"></div>
+        <div class="knobs" id="knobs-ruled"></div>
+        <div class="scale" id="scale-ruled"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Doubled crossbar</b> — two rules, one slot<br><b>The slot</b> — where the text would sit</p>
+        <p class="lede">Two fine rules with a gap between them. <strong>The meaning is in the space, not the marks.</strong></p>
+        <p>It's ruled paper, a musical staff, the guides a scribe drew before writing a single word. Every one of those is an instrument for holding knowledge that is itself empty — which is a more interesting claim about wisdom than any solid shape can make.</p>
+        <p>Practically it's the sharpest of the three: two thin horizontals against two heavy verticals gives real contrast, and contrast is what makes a mark legible at a glance. It's also the most likely to be mistaken for an equals sign inside an H, so the slot has to stay narrower than the rules are thick.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>The three, together</h2>
+    <p>Same proportion, same 45° terminals, same weight. Only the idea inside changes.</p>
+    <div class="compare" id="compare"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Rolled into every Hyper brand</h2>
+    <p>One H, every product. This is the structure you described — and the reason the symbol is worth the investment.</p>
+    <div class="chooser" id="chooser" role="group" aria-label="Choose the mark"></div>
+    <div class="family" id="family"></div>
+  </section>
+
+  <section class="panel">
+    <h2>At the sizes people meet you</h2>
+    <p>Podcast tile, avatar, list row, favicon. Watch Codex's flutes — below about 32px they close, which is exactly why it ships with a solid sibling.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Recommendation — Codex H</span>
+    <h2>The one nobody in your market is drawing</h2>
+    <p>You asked for something different from what's out there. Fluting is genuinely absent from contemporary identity — the whole field has spent a decade choosing between solid slabs and monoline strokes, and incised channels belong to neither. That's not novelty for its own sake; it's the visual language of libraries and books, which is the exact territory you're claiming.</p>
+    <p>Span is the more rigorous <em>idea</em> and I'd happily defend it. But it needs a sentence of explanation, and Codex doesn't — a fluted column reads as knowledge before anyone thinks about why. <strong>For a symbol that has to carry four brands, the one that needs no explanation wins.</strong></p>
+    <p>Take Ruled's doubled bar as the layout device regardless of which mark you pick — two fine rules with a slot between them, holding headlines, captions and lower-thirds across everything you make.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Says</th><th>Strongest at</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>01 Codex H</td><td>Archive, column, pages</td><td>Instant read; gives you a texture system</td><td>Flutes close below ~32px</td></tr>
+          <tr><td>02 Span H</td><td>Two things, connected</td><td>Conceptual precision; ages best</td><td>Needs explaining once</td></tr>
+          <tr><td>03 Ruled H</td><td>The line you read along</td><td>Contrast; sharpest at small size</td><td>Can read as an equals sign</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="next">
+      <p style="margin:0 0 14px"><strong>What I'd do next:</strong></p>
+      <ol>
+        <li>Draw HYPERVISUALS as the wordmark in this grammar — 45° terminals, same proportion — and lock the two together with fixed spacing.</li>
+        <li>Cut the solid small-size sibling: flutes closed, everything else identical. Switch below 32px.</li>
+        <li>Extend the flute rhythm into the pattern system — dividers, cover edges, the HyperPod grid gutters.</li>
+        <li>Test the H alone against three competitors' avatars at 40px, side by side. That's the only test that matters for a symbol.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var quiet=false, showConstr=false, active="codex";
+
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
+  function r2(v){return Math.round(v*100)/100;}
+  function sub(pts){return "M"+pts.map(function(p){return r2(p[0])+" "+r2(p[1]);}).join(" L")+" Z";}
+  function unit(p,q){var dx=q[0]-p[0],dy=q[1]-p[1],L=Math.hypot(dx,dy)||1;return [dx/L,dy/L,L];}
+  function chamfer(pts,sel,c){
+    if(c<=0) return pts.slice();
+    var out=[];
+    for(var i=0;i<pts.length;i++){
+      var P=pts[i];
+      if(sel.indexOf(i)<0){out.push(P);continue;}
+      var A=pts[(i-1+pts.length)%pts.length],B=pts[(i+1)%pts.length];
+      var uA=unit(P,A),uB=unit(P,B);
+      var cc=Math.min(c,uA[2]*0.47,uB[2]*0.47);
+      out.push([P[0]+uA[0]*cc,P[1]+uA[1]*cc]);
+      out.push([P[0]+uB[0]*cc,P[1]+uB[1]*cc]);
+    }
+    return out;
+  }
+  function box(x,y,w,h){return [[x,y],[x+w,y],[x+w,y+h],[x,y+h]];}
+
+  var DEFAULTS={
+    codex:{W:76,pier:23,bar:17,cy:50,flutes:3,fg:2.4,cham:8},
+    span:{W:76,pl:25,pr:15,bar:17,cy:46,over:11,cham:8},
+    ruled:{W:76,pier:23,rule:8,slot:7,cy:50,cham:8}
+  };
+  var S=JSON.parse(JSON.stringify(DEFAULTS));
+  function vb(k){return "-5 -5 "+(S[k].W+10)+" 110";}
+  function aspect(k){return (S[k].W+10)/110;}
+
+  /* ---------- 01 CODEX ---------- */
+  function codexPaths(p,solid){
+    var W=p.W,w=p.pier,bh=p.bar,cy=p.cy,c=p.cham;
+    var n=solid?1:p.flutes, fg=p.fg;
+    var fw=(w-(n-1)*fg)/n;
+    var d="";
+    [0,W-w].forEach(function(x0,side){
+      var outline=chamfer(box(x0,0,w,100),side===0?[0,3]:[1,2],c);
+      d+=sub(outline)+" ";
+      for(var i=1;i<n;i++){
+        var gx=x0+i*fw+(i-1)*fg;
+        d+=sub(box(gx,0,fg,100))+" ";   // evenodd knocks these out
+      }
+    });
+    d+=sub(box(w,cy-bh/2,W-2*w,bh));
+    return d.trim();
+  }
+  function buildCodex(p,plain,solid){
+    var out=[];
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:p.W,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-5,y1:p.cy,x2:p.W+5,y2:p.cy,class:"c-line"}));
+    }
+    out.push(el("path",{d:codexPaths(p,solid),fill:"currentColor","fill-rule":"evenodd"}));
+    return out;
+  }
+
+  /* ---------- 02 SPAN ---------- */
+  function buildSpan(p,plain){
+    var out=[],W=p.W,pl=p.pl,pr=p.pr,bh=p.bar,cy=p.cy,ov=p.over,c=p.cham;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:W,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-5,y1:cy,x2:W+ov+5,y2:cy,class:"c-line"}));
+    }
+    out.push(el("path",{d:sub(chamfer(box(0,0,pl,100),[0,3],c)),fill:"currentColor"}));
+    out.push(el("path",{d:sub(chamfer(box(W-pr,0,pr,100),[1,2],Math.min(c,pr*0.45))),fill:"currentColor"}));
+    var bar=box(pl,cy-bh/2,W-pl-pr+ov,bh);
+    out.push(el("path",{d:sub(chamfer(bar,[1,2],Math.min(c,bh*0.45))),fill:"currentColor"}));
+    return out;
+  }
+
+  /* ---------- 03 RULED ---------- */
+  function buildRuled(p,plain){
+    var out=[],W=p.W,w=p.pier,th=p.rule,sl=p.slot,cy=p.cy,c=p.cham;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:W,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-5,y1:cy,x2:W+5,y2:cy,class:"c-line"}));
+    }
+    out.push(el("path",{d:sub(chamfer(box(0,0,w,100),[0,3],c)),fill:"currentColor"}));
+    out.push(el("path",{d:sub(chamfer(box(W-w,0,w,100),[1,2],c)),fill:"currentColor"}));
+    var iw=W-2*w;
+    out.push(el("path",{d:sub(box(w,cy-sl/2-th,iw,th)),fill:"currentColor"}));
+    out.push(el("path",{d:sub(box(w,cy+sl/2,iw,th)),fill:"currentColor"}));
+    return out;
+  }
+
+  var B={codex:function(p,pl){return buildCodex(p,pl,false);},span:buildSpan,ruled:buildRuled};
+  var KEYS=["codex","span","ruled"];
+  var NAMES={codex:"Codex H",span:"Span H",ruled:"Ruled H"};
+
+  function ground(){return quiet?"var(--stone)":"var(--volt)";}
+  function markInk(){return quiet?"var(--stone-mark)":"var(--volt-ink)";}
+
+  function styleC(svg){
+    svg.querySelectorAll(".c-line").forEach(function(n){
+      n.setAttribute("stroke","currentColor");n.setAttribute("stroke-width",".5");
+      n.setAttribute("stroke-dasharray","2.5 2.5");n.setAttribute("fill","none");n.setAttribute("opacity",".4");
+    });
+  }
+  function dims(k){
+    var p=S[k];
+    if(k==="codex") return ["width "+p.W+"/100","pier "+p.pier,"flutes "+p.flutes,
+                            "channel "+p.fg,"crossbar "+p.bar,"chamfer "+p.cham];
+    if(k==="span")  return ["width "+p.W+"/100","pier L "+p.pl,"pier R "+p.pr,
+                            "ratio "+r2(p.pl/p.pr)+":1","overshoot "+p.over,"bar-y "+p.cy];
+    return ["width "+p.W+"/100","pier "+p.pier,"rule "+p.rule,"slot "+p.slot,
+            "slot/rule "+r2(p.slot/p.rule)];
+  }
+  function markSvg(k,px){
+    var s=el("svg",{viewBox:vb(k),height:px,width:r2(px*aspect(k)),fill:"none"});
+    B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+    return s;
+  }
+
+  var SCALES=[20,28,44,72];
+  function render(k){
+    var fld=document.getElementById("fld-"+k);
+    fld.style.background=ground();
+    var svg=document.getElementById("svg-"+k);
+    svg.textContent=""; svg.setAttribute("viewBox",vb(k));
+    svg.style.color=markInk();
+    B[k](S[k],false).forEach(function(n){svg.appendChild(n);});
+    styleC(svg);
+
+    var d=document.getElementById("dims-"+k); d.textContent="";
+    dims(k).forEach(function(t){var s=document.createElement("span");s.textContent=t;d.appendChild(s);});
+
+    var strip=document.getElementById("scale-"+k); strip.textContent="";
+    SCALES.forEach(function(px){
+      var fig=document.createElement("figure");
+      var sq=document.createElement("div"); sq.className="sq";
+      var pad=Math.max(4,Math.round(px*0.2));
+      sq.style.background=ground();
+      sq.style.width=(Math.round(px*aspect(k))+pad*2)+"px";
+      sq.style.height=(px+pad*2)+"px";
+      var m=markSvg(k,px); m.style.color=markInk();
+      sq.appendChild(m);
+      var c=document.createElement("figcaption"); c.textContent=px+" px";
+      fig.appendChild(sq); fig.appendChild(c); strip.appendChild(fig);
+    });
+
+    if(k==="codex"){
+      var hero=document.getElementById("hero");
+      hero.textContent=""; hero.setAttribute("viewBox",vb("codex"));
+      buildCodex(S.codex,true,false).forEach(function(n){hero.appendChild(n);});
+    }
+    renderCompare();
+    if(k===active){renderFamily();renderTiles();}
+  }
+
+  function renderCompare(){
+    var host=document.getElementById("compare"); host.textContent="";
+    KEYS.forEach(function(k){
+      var fig=document.createElement("figure");
+      var boxEl=document.createElement("div"); boxEl.className="c";
+      boxEl.style.background=ground();
+      var m=markSvg(k,116); m.style.color=markInk();
+      boxEl.appendChild(m);
+      var c=document.createElement("figcaption"); c.textContent=NAMES[k];
+      fig.appendChild(boxEl); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  var BRANDS=[
+    {sub:"Pod",note:"Podcast visuals<br>HP-3 → HP-10",inv:false},
+    {sub:"Library",note:"Archive<br>Back catalogue",inv:true},
+    {sub:"Brand",note:"Identity work<br>Client-facing",inv:false}
+  ];
+  function renderFamily(){
+    var host=document.getElementById("family"); host.textContent="";
+    BRANDS.forEach(function(b){
+      var row=document.createElement("div"); row.className="lock";
+      var g=b.inv?(quiet?"#0B0D0F":"var(--volt-ink)"):ground();
+      var t=b.inv?(quiet?"var(--stone-mark)":"var(--volt)"):markInk();
+      row.style.background=g;
+      var m=markSvg(active,46); m.style.color=t; row.appendChild(m);
+      var wm=document.createElement("div"); wm.className="wm"; wm.style.color=t;
+      wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b.sub+'</span>';
+      row.appendChild(wm);
+      var d=document.createElement("div"); d.className="desc"; d.style.color=t;
+      d.innerHTML=b.note; row.appendChild(d);
+      host.appendChild(row);
+    });
+  }
+
+  var TILES=[{px:96,cap:"96 — podcast tile",inv:false},{px:56,cap:"56 — avatar",inv:true},
+             {px:32,cap:"32 — list row",inv:false},{px:18,cap:"18 — favicon",inv:true}];
+  function renderTiles(){
+    var host=document.getElementById("tiles"); host.textContent="";
+    TILES.forEach(function(t){
+      var fig=document.createElement("figure");
+      var tile=document.createElement("div"); tile.className="tile";
+      tile.style.background=t.inv?(quiet?"#0B0D0F":"var(--volt-ink)"):ground();
+      tile.style.width=t.px+"px"; tile.style.height=t.px+"px";
+      var m=markSvg(active,Math.round(t.px*0.58));
+      m.style.color=t.inv?(quiet?"var(--stone-mark)":"var(--volt)"):markInk();
+      tile.appendChild(m);
+      var c=document.createElement("figcaption"); c.textContent=t.cap;
+      fig.appendChild(tile); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  function buildChooser(){
+    var host=document.getElementById("chooser"); host.textContent="";
+    KEYS.forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.textContent=NAMES[k];
+      b.setAttribute("aria-pressed",String(k===active));
+      b.addEventListener("click",function(){
+        active=k;
+        host.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        renderFamily(); renderTiles();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  var SPEC={
+    codex:[{k:"flutes",label:"Flutes per pier",min:1,max:5,step:1},
+      {k:"fg",label:"Channel width — keep fine",min:1,max:5,step:.2},
+      {k:"W",label:"Letter width",min:60,max:100,step:1},
+      {k:"pier",label:"Pier width",min:16,max:30,step:1},
+      {k:"bar",label:"Crossbar height",min:10,max:26,step:1},
+      {k:"cham",label:"Terminal chamfer",min:0,max:14,step:.5}],
+    span:[{k:"pl",label:"Heavy pier",min:18,max:32,step:1},
+      {k:"pr",label:"Light pier",min:8,max:24,step:1},
+      {k:"over",label:"Bar overshoot",min:0,max:22,step:1},
+      {k:"cy",label:"Bar position",min:36,max:60,step:1},
+      {k:"W",label:"Letter width",min:60,max:100,step:1},
+      {k:"cham",label:"Terminal chamfer",min:0,max:14,step:.5}],
+    ruled:[{k:"slot",label:"Slot — the empty part",min:2,max:20,step:.5},
+      {k:"rule",label:"Rule thickness",min:4,max:16,step:.5},
+      {k:"W",label:"Letter width",min:60,max:100,step:1},
+      {k:"pier",label:"Pier width",min:16,max:30,step:1},
+      {k:"cham",label:"Terminal chamfer",min:0,max:14,step:.5}]
+  };
+  function knobs(k){
+    var host=document.getElementById("knobs-"+k); host.textContent="";
+    SPEC[k].forEach(function(sp){
+      var wrap=document.createElement("div"); wrap.className="knob";
+      var nm=document.createElement("span"); nm.className="k-name"; nm.textContent=sp.label;
+      var vl=document.createElement("span"); vl.className="k-val";
+      vl.textContent=Number(S[k][sp.k]).toFixed(sp.step<1?1:0);
+      wrap.appendChild(nm); wrap.appendChild(vl);
+      var inp=document.createElement("input");
+      inp.type="range";inp.min=sp.min;inp.max=sp.max;inp.step=sp.step;
+      inp.value=S[k][sp.k];inp.setAttribute("aria-label",sp.label);
+      inp.addEventListener("input",function(){
+        S[k][sp.k]=parseFloat(inp.value);
+        vl.textContent=Number(inp.value).toFixed(sp.step<1?1:0);
+        render(k);
+      });
+      wrap.appendChild(inp); host.appendChild(wrap);
+    });
+  }
+
+  function renderAll(){KEYS.forEach(render);}
+  document.getElementById("quiet").addEventListener("change",function(e){quiet=e.target.checked;renderAll();});
+  document.getElementById("constr").addEventListener("change",function(e){showConstr=e.target.checked;renderAll();});
+  document.getElementById("reset").addEventListener("click",function(){
+    S=JSON.parse(JSON.stringify(DEFAULTS)); KEYS.forEach(knobs); renderAll();
+  });
+
+  KEYS.forEach(knobs); buildChooser(); renderAll();
+})();
+</script>

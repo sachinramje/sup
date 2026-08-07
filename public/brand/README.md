@@ -248,3 +248,73 @@ printed, swap the file; the diagonal gap is a liability there and nobody will no
 3. Draw HYPER in the same grammar — every terminal at 45°, the same gap at every joint.
 4. Optical pass at final size: 45° cuts read lighter than square ones, so the piers will
    want to be a touch wider than the maths says.
+
+---
+
+# Round 07 — the H, carrying a knowledge idea
+
+**Two corrections.**
+
+1. Round 06 was faithful to the selected reference sheet, and faithful was the mistake.
+   That chunky 45° facet language is gaming/esports — it reads fast and loud, which is the
+   opposite of the positioning. Kept: the precision of the 45° cut. Dropped: the squat,
+   square proportions.
+2. Every earlier H was two posts and a bar with a different edge treatment. None of them
+   said anything. These three each carry a knowledge idea in the letter's own anatomy.
+
+**Proportion change:** all marks are now drawn at **76 wide × 100 tall**, a real capital's
+proportion. Everything before was square, which is why it read as an icon rather than a
+letter. That single change does most of the work.
+
+| File | Mark | Idea | Role |
+| --- | --- | --- | --- |
+| `hv-k1-codex.svg` | Codex H | Archive — column, pages, lines of text | **The mark.** |
+| `hv-k1-codex-solid.svg` | Codex H solid | — | Small-size cut, flutes closed |
+| `hv-k2-span.svg` | Span H | Two unlike things, connected | Most rigorous idea |
+| `hv-k3-ruled.svg` | Ruled H | The line you read along | Layout device |
+
+`h-knowledge.html` presents all three parametrically, with a quiet colourway toggle,
+the sub-brand family, and tiles at 96/56/32/18px.
+
+## Symbol vs wordmark
+
+Not a choice — a master-brand structure needs both:
+
+- **H (symbol)** — avatars, app icons, favicons, merchandise, the stamp on every visual.
+  This is what rolls every Hyper brand into one asset.
+- **HyperVisuals (wordmark)** — anywhere you're being introduced: site header, deck cover,
+  invoice, contract.
+- **H + Hyper/Pod (lockup)** — what a sub-brand actually uses day to day.
+
+Rule: the symbol never appears alone until the wordmark has earned it. Lock them together
+almost everywhere for the first year or two.
+
+## Constants at the defaults exported here
+
+- **Codex H** — 76×100, pier 23, crossbar 17, 3 flutes per pier, channel 2.4, chamfer 8.
+  Channels must stay fine: at 2–3 units they read as incision, wider and the pier becomes a
+  fence. The flute rhythm extends into the pattern system — dividers, cover edges, grid
+  gutters. Flutes close below ~32px; use the solid sibling there.
+- **Span H** — pier 25 against 15 (1.67:1), crossbar 17 set slightly high at y 46,
+  overshooting the light pier by 11. Unequal piers read as two *different* things held;
+  equal piers read as decoration.
+- **Ruled H** — pier 23, two rules of 8 with a 7 slot. The slot must stay narrower than the
+  rules are thick or it reads as an equals sign.
+
+## Recommendation
+
+**Codex H.** Fluting is genuinely absent from contemporary identity — the field has spent a
+decade choosing between solid slabs and monoline strokes. It's the visual language of
+libraries and books, which is the territory being claimed, and it reads as knowledge before
+anyone thinks about why. Span is the more rigorous idea but needs a sentence of explanation;
+for a symbol carrying four brands, the one that needs none wins.
+
+Take Ruled's doubled bar as the layout device regardless of which mark wins.
+
+## Next
+
+1. Draw HYPERVISUALS as the wordmark in this grammar — 45° terminals, same proportion —
+   and lock the two together with fixed spacing.
+2. Cut the solid small-size sibling into the build pipeline; switch below 32px.
+3. Extend the flute rhythm into the pattern system.
+4. Test the H alone against three competitors' avatars at 40px, side by side.
