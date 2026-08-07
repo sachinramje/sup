@@ -99,3 +99,51 @@ The Cut at 2 → 6 pieces.
 
 The Cut against H-Gate. Trademark-search both, print at 12mm black on white, and lock
 the winner's single number (kerf width or lintel taper) as the system constant.
+
+---
+
+# Round 04 — the H as master mark
+
+"Hyper" is the constant across HyperPod, HyperLibrary and HyperBrand, so the letter is
+the mark. A symbol has to be taught once per brand; a letter is read on sight, and this
+one is already in every product name. It also can't be broken by a format count, a new
+product line, or a change in what gets made — it's tied to the name.
+
+| File | Direction | Variable | Role |
+| --- | --- | --- | --- |
+| `hv-h1-cut.svg` | Cut H | The kerf | **The mark.** Crossbar cut free of the piers. |
+| `hv-h2-monolith.svg` | Monolith H | The taper | Reserve / small-size variant |
+| `hv-h3-gate.svg` | Gate H | Perspective | Alternative if motion is wanted |
+| `hv-h4-rule.svg` | Rule H | The overshoot | Layout rule, not the logo |
+
+`h-monogram.html` presents all four parametrically, plus the sub-brand family
+(HYPER/POD, HYPER/LIBRARY, HYPER/BRAND) and icon tiles at 96/56/32/18px.
+
+## Constants at the defaults exported here
+
+- **Cut H** — pier 26, crossbar 22, kerf 4, crossbar centre at y 52. The crossbar
+  touches nothing; closure happens in the eye. Same kerf device as `hv-d-cut.svg`, so
+  the logo's construction and the product's construction are one idea. Past kerf ~6 the
+  letter stops resolving.
+- **Monolith H** — pier 36 at top tapering to 30 at the base, crossbar 20 set low at
+  y 56. Counters widen downward, which places the viewer below the mark. Strongest of
+  the four at very small sizes because it is almost entirely mass.
+- **Gate H** — near pier 22, far pier 0.83×, lintel 24, taper 14. Below taper 12 it
+  reads as a printing error rather than a decision.
+- **Rule H** — pier 24, rule height 16, overshoot 20 per side. Never square; falls back
+  to Cut H in square tiles.
+
+## Recommendation
+
+**Cut H as the mark, Rule H's overshoot as the layout device** — the same crossbar,
+extended, doing dividers, underlines and lower-thirds. One mark, one rule.
+
+## Next
+
+1. Trademark search first — single letters are heavily registered, and this is the step
+   most likely to force a change.
+2. Lock the kerf as a ratio of pier width, not an absolute. That ratio is the system.
+3. Draw a small-size variant with the kerf widened, the way a typeface ships an optical
+   size; switch to it below roughly 24px.
+4. Derive clear space from pier width and wordmark cap height from crossbar height, so
+   every lockup comes from the mark rather than being eyeballed.

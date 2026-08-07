@@ -1,0 +1,561 @@
+<title>HyperVisuals — The H as Master Mark</title>
+<style>
+:root{
+  --ink:#14171B; --ink-soft:#4C545C;
+  --paper:#E4E6E2; --plate:#EFF0ED;
+  --rule:#C6CAC4; --rule-soft:#D6D9D3;
+  --redline:#A93A29; --redline-soft:#A93A2914;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#101316;--plate:#171B1F;
+    --rule:#2C3238;--rule-soft:#232930;--redline:#E06B54;--redline-soft:#E06B5414;
+    --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#101316;--plate:#171B1F;
+  --rule:#2C3238;--rule-soft:#232930;--redline:#E06B54;--redline-soft:#E06B5414;
+  --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+:root[data-theme="light"]{--ink:#14171B;--ink-soft:#4C545C;--paper:#E4E6E2;--plate:#EFF0ED;
+  --rule:#C6CAC4;--rule-soft:#D6D9D3;--redline:#A93A29;--redline-soft:#A93A2914;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:34px}
+.slug{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--redline);display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:26px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,58px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+.callout{border-left:2px solid var(--redline);background:var(--redline-soft);
+  padding:18px 22px;margin:0 0 44px;max-width:66ch}
+.callout p{margin:0 0 12px}.callout p:last-child{margin:0}
+.callout strong{font-weight:600}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:12px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:52px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.bar label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;color:var(--ink-soft)}
+.bar input[type=checkbox]{accent-color:var(--redline);width:14px;height:14px;cursor:pointer}
+.bar button{font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:5px 12px;border-radius:2px;
+  transition:border-color .15s,color .15s}
+.bar button:hover{border-color:var(--redline);color:var(--redline)}
+.bar .spacer{flex:1}
+
+.plate{margin-bottom:clamp(56px,9vw,100px)}
+.plate-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px}
+.idx{font-family:var(--mono);font-size:12px;color:var(--redline);letter-spacing:.1em}
+.plate-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,30px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.05fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.field{background:var(--plate);border:1px solid var(--rule);border-radius:2px;
+  padding:clamp(20px,4vw,38px);box-shadow:var(--shadow);display:flex;
+  align-items:center;justify-content:center;min-height:200px}
+.field svg{display:block;width:100%;height:auto;color:var(--ink)}
+.dims{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 18px;font-variant-numeric:tabular-nums}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}.lede strong{font-weight:600}
+.reads{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:2px solid var(--redline);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9}
+.reads b{color:var(--ink);font-weight:400}
+
+.knobs{margin-top:24px;display:grid;gap:14px}
+.knob{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+.knob .k-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.knob .k-val{font-family:var(--mono);font-size:10.5px;color:var(--redline);font-variant-numeric:tabular-nums}
+.knob input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--redline);height:18px;cursor:pointer}
+
+.scale{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
+.scale figure{margin:0;display:grid;justify-items:center;gap:7px}
+.scale svg{display:block;color:var(--ink)}
+.scale figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+/* system panels */
+.panel{border-top:1.5px solid var(--ink);padding-top:26px;margin-bottom:clamp(48px,8vw,84px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 14px}
+.panel > p{max-width:60ch;margin:0 0 26px}
+.chooser{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);border-radius:2px;
+  overflow:hidden;margin-bottom:30px;max-width:520px}
+.chooser button{flex:1;min-width:96px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 6px;background:none;border:none;
+  border-right:1px solid var(--rule);color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.chooser button:last-child{border-right:none}
+.chooser button[aria-pressed="true"]{background:var(--redline);color:var(--plate)}
+
+.family{display:grid;gap:0;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px);padding:clamp(16px,3vw,24px) clamp(16px,3vw,26px);
+  background:var(--plate);border-bottom:1px solid var(--rule)}
+.lock:last-child{border-bottom:none}
+.lock svg{display:block;color:var(--ink);flex:none}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,3vw,27px);letter-spacing:-.02em;line-height:1}
+.lock .wm .sl{color:var(--redline);font-weight:400;padding:0 .06em}
+.lock .wm .sub{color:var(--ink-soft)}
+.lock .desc{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:1.7}
+@media (max-width:620px){.lock .desc{display:none}}
+
+.tiles{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;margin-top:8px}
+.tiles figure{margin:0;display:grid;justify-items:center;gap:9px}
+.tiles .tile{background:var(--ink);border-radius:14%;display:flex;
+  align-items:center;justify-content:center;overflow:hidden}
+.tiles svg{display:block;color:var(--plate)}
+.tiles figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 18px}
+.verdict p{max-width:58ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--plate);background:var(--redline);
+  padding:4px 10px;border-radius:2px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.next{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.next ol{margin:0;padding-left:20px;max-width:56ch}
+.next li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--redline);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Identity — Round 04</span>
+      <span>Master mark — H</span>
+    </div>
+    <h1>One letter,<br>every brand<em>.</em></h1>
+    <p class="standfirst">HyperPod. HyperLibrary. HyperBrand. The word is the constant, so the letter is the mark — and unlike a symbol, it arrives already legible. Four ways to cut an H, and the system that hangs off whichever one wins.</p>
+  </header>
+
+  <div class="callout">
+    <p><strong>Why this beats every abstract mark I've shown you.</strong></p>
+    <p>A symbol has to be taught, once per brand, at your expense. A letter is read on sight — and yours is already in every product name you own. That makes the H the cheapest possible mark to launch and the hardest to dislodge later.</p>
+    <p>It also solves the problem that killed Nine: an H cannot be broken by a format count, a new product line, or a pivot in what you make. It's tied to the <em>name</em>, and the name isn't changing.</p>
+  </div>
+
+  <div class="bar">
+    <label><input type="checkbox" id="constr"> Show construction</label>
+    <label><input type="checkbox" id="invert"> Knockout ground</label>
+    <span class="spacer"></span>
+    <button id="reset" type="button">Reset all</button>
+  </div>
+
+  <!-- 01 -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">01</span><h2>Cut H</h2>
+      <span class="axis">Variable — the kerf</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-cut" fill="none" aria-label="Cut H"></svg></div>
+        <div class="dims" id="dims-cut"></div>
+        <div class="knobs" id="knobs-cut"></div>
+        <div class="scale" id="scale-cut"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Two piers</b> — untouched<br><b>One crossbar</b> — cut free, floating in the gap</p>
+        <p class="lede">The crossbar doesn't touch the piers. <strong>The H is held together by your eye, not by the geometry.</strong></p>
+        <p>This is The Cut and the monogram folded into one mark. The kerf — that clean gap of separation — is the same device, so the logic of the logo and the logic of your product are the same logic. That's the tightest identity on the table.</p>
+        <p>It reads instantly as H because closure is automatic; the brain refuses to see three shapes when it can see a letter. That half-second of assembly is the mark doing work. Push the kerf past about 6 and it starts to fall apart — find the edge and stop just short of it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">02</span><h2>Monolith H</h2>
+      <span class="axis">Variable — the taper</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-mono" fill="none" aria-label="Monolith H"></svg></div>
+        <div class="dims" id="dims-mono"></div>
+        <div class="knobs" id="knobs-mono"></div>
+        <div class="scale" id="scale-mono"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Heavy piers</b> — mass, not line<br><b>Slot counters</b> — widening as they descend</p>
+        <p class="lede">Piers thick enough to be walls, and two slots of light between them. <strong>Seen from slightly below, like everything built to outlast you.</strong></p>
+        <p>The counters widen toward the bottom, which is the whole trick: it puts you underneath the mark looking up. That's the posture of a monument, and it's the only one of the four that has genuine <em>stillness</em> — nothing here is moving or resolving, it's just standing.</p>
+        <p>Set the crossbar low, as it is by default. A centred crossbar is neutral; a low one has a base, and things with bases read as permanent. This is the wisdom register taken literally, and it's the strongest of the four at very small sizes because it's almost entirely mass.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">03</span><h2>Gate H</h2>
+      <span class="axis">Variable — the perspective</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-gate" fill="none" aria-label="Gate H"></svg></div>
+        <div class="dims" id="dims-gate"></div>
+        <div class="knobs" id="knobs-gate"></div>
+        <div class="scale" id="scale-gate"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Two posts, one lintel</b> — already a doorway<br><b>Far pier narrows</b> — so you're looking through it</p>
+        <p class="lede">An H is two posts and a beam. <strong>It's a gate that happens to be a letter.</strong></p>
+        <p>Taper the lintel toward the far pier and narrow that pier to match, and the letter stops being flat — the eye reads a threshold rather than a glyph. Pull taper to zero and it collapses into an ordinary H, which is the test that the perspective is load-bearing and not decoration.</p>
+        <p>The risk to watch: timid taper reads as a printing error rather than a decision. If you take this one, commit past 12 or don't do it at all.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">04</span><h2>Rule H</h2>
+      <span class="axis">Variable — the overshoot</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-rule" fill="none" aria-label="Rule H"></svg></div>
+        <div class="dims" id="dims-rule"></div>
+        <div class="knobs" id="knobs-rule"></div>
+        <div class="scale" id="scale-rule"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Crossbar overshoots</b> — past both piers<br><b>The overshoot is a rule</b> — it can run any length</p>
+        <p class="lede">The crossbar breaks out of the letter and keeps going. <strong>The mark and the layout are the same object.</strong></p>
+        <p>That escaping bar is a horizontal rule you can extend to any length — a divider, an underline for a headline, the spine a caption hangs from, the line a lower-third rides in on. It's the same asset as the slash: not a picture, a <em>rule</em> that extends into everything you make later.</p>
+        <p>For a library and an archive that's the right instinct — a ruled line is what a record looks like. The cost is that this H is never square, so it needs its own clear-space spec and it will fight small square avatars. Use the plain H there and the ruled H everywhere you control the layout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM: sub-brands -->
+  <section class="panel">
+    <h2>The system it hangs off</h2>
+    <p>Pick a mark and watch the family. The H never changes between brands — only the word after the slash does. That discipline is what makes an H worth owning: three products, one impression, no re-teaching.</p>
+    <div class="chooser" id="chooser" role="group" aria-label="Choose the master mark"></div>
+    <div class="family" id="family"></div>
+  </section>
+
+  <!-- SYSTEM: icon -->
+  <section class="panel">
+    <h2>Where it actually lives</h2>
+    <p>Podcast tiles, avatars, favicons — every platform wants a filled square, so the working icon is the H knocked out of a solid. This is the test that matters most, because it's the size most people will ever see you at.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Recommendation — 01 Cut H, with 04 as its layout rule</span>
+    <h2>Take the kerf, keep the overshoot</h2>
+    <p>Cut H wins on the argument I've been making since round one: it's the only mark where the logo's construction and the product's construction are the same idea. The gap that separates the crossbar from the piers is the gap that separates one insight from the next. You don't have to explain that — it just quietly holds.</p>
+    <p>Then take Rule H's overshoot and make it the layout device rather than a competing logo. Same crossbar, extended. <strong>One mark, one rule</strong> — the H for identity, the extended bar for every layout it has to live in.</p>
+    <p>Monolith is the one to keep in reserve. If Cut H tests as too quiet at very small sizes, Monolith is the answer, and it's the only one of the four that can be scaled down indefinitely without care.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Strongest at</th><th>Weakest at</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>01 Cut H</td><td>Logic — the kerf is your product</td><td>Kerf closes up below ~20px</td><td>The mark</td></tr>
+          <tr><td>02 Monolith H</td><td>Small sizes; stillness</td><td>Least distinctive silhouette</td><td>Reserve / small-size variant</td></tr>
+          <tr><td>03 Gate H</td><td>Depth without a metaphor</td><td>Dies if the taper is timid</td><td>Alternative if you want motion</td></tr>
+          <tr><td>04 Rule H</td><td>Extends into layout</td><td>Never square; fights avatars</td><td>Layout rule, not the logo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="next">
+      <p style="margin:0 0 14px"><strong>What I'd do next:</strong></p>
+      <ol>
+        <li>Trademark search on the chosen H, classes covering media production and software. Single letters are heavily registered — this is the step most likely to force a change, so do it before anything else.</li>
+        <li>Lock the kerf as a ratio of pier width, not an absolute — that's the number the whole system inherits.</li>
+        <li>Draw a small-size variant with the kerf widened, the way a typeface ships an optical size. Below roughly 24px the logo should switch to it automatically.</li>
+        <li>Set the clear space off the pier width, and the wordmark's cap height off the crossbar height, so every lockup derives from the mark instead of being eyeballed.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var showConstr=false, knockout=false, active="cut";
+
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
+  function r2(v){return Math.round(v*10)/10;}
+  function poly(pts){return el("polygon",{points:pts.map(function(p){return r2(p[0])+","+r2(p[1]);}).join(" "),fill:"currentColor"});}
+  function rect(x,y,w,h){return el("rect",{x:r2(x),y:r2(y),width:r2(w),height:r2(h),fill:"currentColor"});}
+
+  var DEFAULTS={
+    cut:{pier:26,bar:22,cy:52,kerf:4},
+    mono:{ptop:36,taper:6,bar:20,cy:56},
+    gate:{pier:22,taper:14,bar:24},
+    rule:{pier:24,bar:16,cy:50,over:20}
+  };
+  var S=JSON.parse(JSON.stringify(DEFAULTS));
+
+  /* view boxes — Rule H is wider than tall */
+  function vbOf(k){
+    if(k==="rule"){ var o=S.rule.over; return {x:-o-6,y:-6,w:100+2*o+12,h:112}; }
+    return {x:-6,y:-6,w:112,h:112};
+  }
+  function vbStr(k){var v=vbOf(k);return v.x+" "+v.y+" "+v.w+" "+v.h;}
+
+  /* ---- 01 CUT H ---- */
+  function buildCut(p,plain){
+    var out=[],w=p.pier,bh=p.bar,cy=p.cy,k=p.kerf;
+    var by0=cy-bh/2, bw=100-2*w-2*k;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-6,y1:50,x2:106,y2:50,class:"c-line"}));
+      out.push(el("line",{x1:r2(w),y1:-6,x2:r2(w),y2:106,class:"c-line"}));
+      out.push(el("line",{x1:r2(100-w),y1:-6,x2:r2(100-w),y2:106,class:"c-line"}));
+    }
+    out.push(rect(0,0,w,100));
+    out.push(rect(100-w,0,w,100));
+    if(bw>0.5) out.push(rect(w+k,by0,bw,bh));
+    return out;
+  }
+
+  /* ---- 02 MONOLITH H ---- */
+  function buildMono(p,plain){
+    var out=[],wt=p.ptop,wb=p.ptop-p.taper,bh=p.bar,cy=p.cy;
+    function wl(y){return wt+(wb-wt)*y/100;}
+    var by0=cy-bh/2, by1=cy+bh/2;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      out.push(el("line",{x1:50,y1:-6,x2:50,y2:106,class:"c-line"}));
+      out.push(el("line",{x1:r2(wt),y1:0,x2:r2(wb),y2:100,class:"c-path"}));
+      out.push(el("line",{x1:r2(100-wt),y1:0,x2:r2(100-wb),y2:100,class:"c-path"}));
+    }
+    out.push(poly([[0,0],[wt,0],[wb,100],[0,100]]));
+    out.push(poly([[100,0],[100-wt,0],[100-wb,100],[100,100]]));
+    out.push(poly([[wl(by0),by0],[100-wl(by0),by0],[100-wl(by1),by1],[wl(by1),by1]]));
+    return out;
+  }
+
+  /* ---- 03 GATE H ---- */
+  function buildGate(p,plain){
+    var out=[],w=p.pier,d=p.taper,bh=p.bar;
+    var rw=w*(1-d*0.012);
+    var a=50-bh/2,b=50+bh/2,a2=a+d*0.35,b2=b-d*0.65;
+    if(b2<a2+2) b2=a2+2;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-6,y1:50,x2:106,y2:50,class:"c-line"}));
+      out.push(el("line",{x1:r2(w),y1:r2(a),x2:r2(100-rw),y2:r2(a2),class:"c-path"}));
+      out.push(el("line",{x1:r2(w),y1:r2(b),x2:r2(100-rw),y2:r2(b2),class:"c-path"}));
+    }
+    out.push(rect(0,0,w,100));
+    out.push(rect(100-rw,0,rw,100));
+    out.push(poly([[w,a],[100-rw,a2],[100-rw,b2],[w,b]]));
+    return out;
+  }
+
+  /* ---- 04 RULE H ---- */
+  function buildRule(p,plain){
+    var out=[],w=p.pier,bh=p.bar,cy=p.cy,o=p.over;
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      out.push(el("line",{x1:r2(-o-4),y1:50,x2:r2(104+o),y2:50,class:"c-line"}));
+    }
+    out.push(rect(0,0,w,100));
+    out.push(rect(100-w,0,w,100));
+    out.push(rect(-o,cy-bh/2,100+2*o,bh));
+    return out;
+  }
+
+  var B={cut:buildCut,mono:buildMono,gate:buildGate,rule:buildRule};
+  var KEYS=["cut","mono","gate","rule"];
+  var NAMES={cut:"Cut H",mono:"Monolith H",gate:"Gate H",rule:"Rule H"};
+
+  function styleC(svg){
+    svg.querySelectorAll(".c-line").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");n.setAttribute("stroke-width","0.5");
+      n.setAttribute("stroke-dasharray","2.5 2.5");n.setAttribute("fill","none");n.setAttribute("opacity","0.8");
+    });
+    svg.querySelectorAll(".c-path").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");n.setAttribute("stroke-width","0.8");n.setAttribute("fill","none");
+    });
+  }
+
+  function dims(k){
+    var p=S[k];
+    if(k==="cut")  return ["pier "+p.pier,"bar "+p.bar,"kerf "+p.kerf,"bar-y "+p.cy];
+    if(k==="mono") return ["pier top "+p.ptop,"taper "+p.taper,"bar "+p.bar,"bar-y "+p.cy];
+    if(k==="gate") return ["pier "+p.pier,"taper "+p.taper,"far pier "+r2(p.pier*(1-p.taper*0.012)),"bar "+p.bar];
+    return ["pier "+p.pier,"bar "+p.bar,"overshoot "+p.over,"total w "+(100+2*p.over)];
+  }
+
+  /* mark svg at a given pixel height */
+  function markSvg(k,px,opts){
+    opts=opts||{};
+    var v=vbOf(k), aspect=v.w/v.h;
+    var s=el("svg",{viewBox:vbStr(k),height:px,width:r2(px*aspect),fill:"none"});
+    B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+    if(opts.color) s.setAttribute("color",opts.color);
+    return s;
+  }
+
+  var SCALES=[20,28,44,72];
+  function render(k){
+    var svg=document.getElementById("svg-"+k);
+    svg.textContent=""; svg.setAttribute("viewBox",vbStr(k));
+    if(knockout){
+      var v=vbOf(k);
+      svg.appendChild(el("rect",{x:v.x,y:v.y,width:v.w,height:v.h,fill:"var(--ink)"}));
+    }
+    var g=el("g",{}); if(knockout) g.setAttribute("color","var(--plate)");
+    B[k](S[k],false).forEach(function(n){g.appendChild(n);});
+    svg.appendChild(g); styleC(svg);
+
+    var d=document.getElementById("dims-"+k); d.textContent="";
+    dims(k).forEach(function(t){var s=document.createElement("span");s.textContent=t;d.appendChild(s);});
+
+    var strip=document.getElementById("scale-"+k); strip.textContent="";
+    SCALES.forEach(function(px){
+      var fig=document.createElement("figure");
+      fig.appendChild(markSvg(k,px));
+      var c=document.createElement("figcaption"); c.textContent=px+" px";
+      fig.appendChild(c); strip.appendChild(fig);
+    });
+
+    if(k===active){ renderFamily(); renderTiles(); }
+  }
+
+  /* ---------- sub-brand family ---------- */
+  var BRANDS=[
+    {sub:"Pod",     note:"Podcast visuals<br>HP-3 → HP-10"},
+    {sub:"Library", note:"Archive<br>Searchable back catalogue"},
+    {sub:"Brand",   note:"Identity work<br>Client-facing"}
+  ];
+  function renderFamily(){
+    var host=document.getElementById("family"); host.textContent="";
+    BRANDS.forEach(function(b){
+      var row=document.createElement("div"); row.className="lock";
+      row.appendChild(markSvg(active,46));
+      var wm=document.createElement("div"); wm.className="wm";
+      wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b.sub+'</span>';
+      row.appendChild(wm);
+      var d=document.createElement("div"); d.className="desc"; d.innerHTML=b.note;
+      row.appendChild(d);
+      host.appendChild(row);
+    });
+  }
+
+  /* ---------- icon tiles ---------- */
+  var TILES=[{px:96,cap:"96 — podcast tile"},{px:56,cap:"56 — avatar"},
+             {px:32,cap:"32 — list row"},{px:18,cap:"18 — favicon"}];
+  function renderTiles(){
+    var host=document.getElementById("tiles"); host.textContent="";
+    var k = active==="rule" ? "cut" : active;   // ruled bar can't sit in a square tile
+    TILES.forEach(function(t){
+      var fig=document.createElement("figure");
+      var tile=document.createElement("div"); tile.className="tile";
+      tile.style.width=t.px+"px"; tile.style.height=t.px+"px";
+      tile.appendChild(markSvg(k,Math.round(t.px*0.52),{color:"var(--plate)"}));
+      var c=document.createElement("figcaption"); c.textContent=t.cap;
+      fig.appendChild(tile); fig.appendChild(c); host.appendChild(fig);
+    });
+    if(active==="rule"){
+      var note=document.createElement("figcaption");
+      note.style.alignSelf="flex-end"; note.style.maxWidth="18ch"; note.style.lineHeight="1.7";
+      note.textContent="Rule H falls back to Cut H in square tiles — the overshoot has nowhere to go.";
+      host.appendChild(note);
+    }
+  }
+
+  /* ---------- chooser ---------- */
+  function buildChooser(){
+    var host=document.getElementById("chooser"); host.textContent="";
+    KEYS.forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.textContent=NAMES[k];
+      b.setAttribute("aria-pressed",String(k===active));
+      b.addEventListener("click",function(){
+        active=k;
+        host.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        renderFamily(); renderTiles();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  /* ---------- knobs ---------- */
+  var SPEC={
+    cut:[{k:"kerf",label:"Kerf — the gap",min:0,max:9,step:.5},
+         {k:"pier",label:"Pier width",min:18,max:34,step:1},
+         {k:"bar",label:"Crossbar height",min:14,max:30,step:1},
+         {k:"cy",label:"Crossbar position",min:40,max:62,step:1}],
+    mono:[{k:"taper",label:"Taper — the view from below",min:0,max:14,step:.5},
+         {k:"ptop",label:"Pier width at top",min:26,max:44,step:1},
+         {k:"bar",label:"Crossbar height",min:14,max:28,step:1},
+         {k:"cy",label:"Crossbar position",min:44,max:64,step:1}],
+    gate:[{k:"taper",label:"Perspective taper",min:0,max:26,step:1},
+         {k:"pier",label:"Near pier width",min:14,max:30,step:1},
+         {k:"bar",label:"Lintel height",min:14,max:36,step:1}],
+    rule:[{k:"over",label:"Overshoot per side",min:0,max:34,step:1},
+         {k:"pier",label:"Pier width",min:16,max:30,step:1},
+         {k:"bar",label:"Rule height",min:8,max:24,step:1},
+         {k:"cy",label:"Rule position",min:40,max:60,step:1}]
+  };
+  function knobs(k){
+    var host=document.getElementById("knobs-"+k); host.textContent="";
+    SPEC[k].forEach(function(sp){
+      var wrap=document.createElement("div"); wrap.className="knob";
+      var nm=document.createElement("span"); nm.className="k-name"; nm.textContent=sp.label;
+      var vl=document.createElement("span"); vl.className="k-val";
+      vl.textContent=Number(S[k][sp.k]).toFixed(sp.step<1?1:0);
+      wrap.appendChild(nm); wrap.appendChild(vl);
+      var inp=document.createElement("input");
+      inp.type="range"; inp.min=sp.min; inp.max=sp.max; inp.step=sp.step;
+      inp.value=S[k][sp.k]; inp.setAttribute("aria-label",sp.label);
+      inp.addEventListener("input",function(){
+        S[k][sp.k]=parseFloat(inp.value);
+        vl.textContent=Number(inp.value).toFixed(sp.step<1?1:0);
+        render(k);
+      });
+      wrap.appendChild(inp); host.appendChild(wrap);
+    });
+  }
+
+  function renderAll(){KEYS.forEach(render);}
+  document.getElementById("constr").addEventListener("change",function(e){showConstr=e.target.checked;renderAll();});
+  document.getElementById("invert").addEventListener("change",function(e){knockout=e.target.checked;renderAll();});
+  document.getElementById("reset").addEventListener("click",function(){
+    S=JSON.parse(JSON.stringify(DEFAULTS)); KEYS.forEach(knobs); renderAll();
+  });
+
+  KEYS.forEach(knobs); buildChooser(); renderAll();
+})();
+</script>
