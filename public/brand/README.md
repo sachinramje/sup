@@ -61,3 +61,41 @@ with sliders, a construction-line overlay, and a 20/28/44/72px legibility strip.
   Set drift to 0 and the mark dies — that offset is load-bearing, not decorative.
 
 All three use `fill="currentColor"` and are authored in a 100-unit box.
+
+---
+
+# Round 03 — count-agnostic marks
+
+**Correction:** the format count is variable (HP-3 → HP-10), so any mark whose meaning
+depends on "nine" breaks the first time a different format ships. `hv-b-nine.svg` is
+**retired as a logo** and kept only as a pattern system, where a shifting count is a feature.
+
+Tesseract and Strata were never counting anything and carry forward unchanged.
+
+| File | Direction | Variable | Status |
+| --- | --- | --- | --- |
+| `hv-d-cut.svg` | The Cut | Partition | New. **Recommended.** |
+| `hv-e-threshold.svg` | Threshold | Depth | New |
+| `hv-f-hgate.svg` | H-Gate | Letterform | New |
+| `hv-a-tesseract.svg` | Tesseract | Dimension | Carried forward |
+| `hv-c-strata.svg` | Strata | Accumulation | Carried forward |
+| `hv-b-nine.svg` | Nine | Order | Retired — pattern use only |
+
+`count-agnostic-marks.html` presents all five parametrically, plus a strip showing
+The Cut at 2 → 6 pieces.
+
+## Constants at the defaults exported here
+
+- **The Cut** — kerf 5, first cut at x 40, second at y 56. Identity lives in the kerf,
+  not the piece count: the mark holds from 2 pieces to 6. The cuts are deliberately
+  *unequal* — an even grid requires no judgement, and judgement is the product.
+- **Threshold** — opening 40, inset 14 from top and right, two solid planes (floor +
+  left wall). Filled planes rather than outline, so it reads as mass, not diagram.
+- **H-Gate** — pier 22, lintel height 24, taper 14. The far pier narrows to 0.83× and
+  the lintel converges. Set taper to 0 and it collapses to a plain H — that is the test
+  that the perspective is load-bearing.
+
+## Shortlist
+
+The Cut against H-Gate. Trademark-search both, print at 12mm black on white, and lock
+the winner's single number (kerf width or lintel taper) as the system constant.
