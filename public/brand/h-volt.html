@@ -1,0 +1,638 @@
+<title>HyperVisuals — The H, Cut at 45°</title>
+<style>
+:root{
+  --ink:#14171B; --ink-soft:#4C545C;
+  --paper:#E4E6E2; --plate:#EFF0ED;
+  --rule:#C6CAC4; --rule-soft:#D6D9D3;
+  --volt:#CCFF00; --volt-deep:#8FB300; --volt-ink:#0C0E10;
+  --accent:#8FB300;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#0D0F11;--plate:#15181B;
+    --rule:#2C3238;--rule-soft:#232930;--accent:#CCFF00;
+    --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#0D0F11;--plate:#15181B;
+  --rule:#2C3238;--rule-soft:#232930;--accent:#CCFF00;
+  --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+:root[data-theme="light"]{--ink:#14171B;--ink-soft:#4C545C;--paper:#E4E6E2;--plate:#EFF0ED;
+  --rule:#C6CAC4;--rule-soft:#D6D9D3;--accent:#8FB300;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:34px}
+.slug{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;align-items:center}
+.slug span{background:var(--volt);color:var(--volt-ink);padding:4px 9px;border-radius:1px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,58px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+.callout{border-left:3px solid var(--volt);padding:18px 22px;margin:0 0 44px;max-width:66ch;
+  background:color-mix(in srgb,var(--volt) 8%,transparent)}
+.callout p{margin:0 0 12px}.callout p:last-child{margin:0}
+.callout strong{font-weight:600}
+
+/* hero */
+.hero{background:var(--volt);border-radius:2px;padding:clamp(24px,5vw,56px);
+  margin-bottom:clamp(48px,8vw,80px);display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,52px);align-items:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.hero-mark svg{display:block;width:100%;height:auto;color:var(--volt-ink)}
+.hero-side .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--volt-ink);opacity:.62;margin:0 0 14px}
+.hero-side h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(22px,3.6vw,34px);letter-spacing:-.025em;line-height:1.02;
+  margin:0 0 16px;color:var(--volt-ink)}
+.hero-side p{margin:0 0 14px;color:var(--volt-ink);opacity:.78;font-size:16px;max-width:40ch}
+.hero-side p:last-child{margin:0}
+.hero-side strong{opacity:1;font-weight:600}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:12px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:52px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.bar label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;color:var(--ink-soft)}
+.bar input[type=checkbox]{accent-color:var(--volt-deep);width:14px;height:14px;cursor:pointer}
+.bar button{font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:5px 12px;border-radius:2px;
+  transition:border-color .15s,color .15s}
+.bar button:hover{border-color:var(--accent);color:var(--accent)}
+.bar .spacer{flex:1}
+
+.plate{margin-bottom:clamp(56px,9vw,100px)}
+.plate-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px}
+.idx{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  background:var(--volt);color:var(--volt-ink);padding:3px 7px;border-radius:1px}
+.plate-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,30px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.05fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.field{background:var(--volt);border-radius:2px;padding:clamp(20px,4vw,40px);box-shadow:var(--shadow)}
+.field svg{display:block;width:100%;height:auto;color:var(--volt-ink)}
+.dims{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 18px;font-variant-numeric:tabular-nums}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}.lede strong{font-weight:600}
+.reads{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:3px solid var(--volt);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9}
+.reads b{color:var(--ink);font-weight:400}
+
+.zoomwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+.zoomwrap figure{margin:0;display:grid;gap:8px;justify-items:center}
+.zoomwrap .z{background:var(--volt);border-radius:2px;width:100%;aspect-ratio:1;padding:5px}
+.zoomwrap svg{display:block;width:100%;height:100%;color:var(--volt-ink)}
+.zoomwrap figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);text-align:center}
+
+.knobs{margin-top:24px;display:grid;gap:14px}
+.knob{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+.knob .k-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.knob .k-val{font-family:var(--mono);font-size:10.5px;color:var(--accent);font-variant-numeric:tabular-nums}
+.knob input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--volt-deep);height:18px;cursor:pointer}
+.seg{grid-column:1/-1;display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{flex:1;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  padding:7px 3px;background:none;border:none;border-right:1px solid var(--rule);
+  color:var(--ink-soft);cursor:pointer;transition:background .15s,color .15s}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed="true"]{background:var(--volt);color:var(--volt-ink)}
+
+.scale{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.scale figure{margin:0;display:grid;justify-items:center;gap:7px}
+.scale .sq{background:var(--volt);border-radius:2px;display:flex;align-items:center;justify-content:center}
+.scale svg{display:block;color:var(--volt-ink)}
+.scale figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+.panel{border-top:1.5px solid var(--ink);padding-top:26px;margin-bottom:clamp(48px,8vw,84px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 14px}
+.panel > p{max-width:60ch;margin:0 0 26px}
+.chooser{display:flex;flex-wrap:wrap;border:1px solid var(--rule);border-radius:2px;
+  overflow:hidden;margin-bottom:30px;max-width:430px}
+.chooser button{flex:1;min-width:100px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 6px;background:none;border:none;
+  border-right:1px solid var(--rule);color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.chooser button:last-child{border-right:none}
+.chooser button[aria-pressed="true"]{background:var(--volt);color:var(--volt-ink)}
+
+.compare{display:flex;flex-wrap:wrap;gap:18px}
+.compare figure{margin:0;display:grid;gap:9px;justify-items:center}
+.compare .c{background:var(--volt);border-radius:2px;padding:16px}
+.compare svg{display:block;color:var(--volt-ink)}
+.compare figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.family{border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px);
+  padding:clamp(16px,3vw,24px) clamp(16px,3vw,26px);border-bottom:1px solid var(--rule)}
+.lock:last-child{border-bottom:none}
+.lock.on-volt{background:var(--volt)}
+.lock.on-volt svg{color:var(--volt-ink)}
+.lock.on-volt .wm{color:var(--volt-ink)}
+.lock.on-volt .wm .sub{opacity:.55}
+.lock.on-ink{background:var(--volt-ink)}
+.lock.on-ink svg{color:var(--volt)}
+.lock.on-ink .wm{color:#F2F4EE}
+.lock.on-ink .wm .sub{opacity:.55}
+.lock svg{display:block;flex:none}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,3vw,27px);letter-spacing:-.02em;line-height:1}
+.lock .wm .sl{font-weight:400;padding:0 .06em;opacity:.5}
+.lock .desc{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.55;text-align:right;line-height:1.7}
+.lock.on-volt .desc{color:var(--volt-ink)}
+.lock.on-ink .desc{color:#F2F4EE}
+@media (max-width:620px){.lock .desc{display:none}}
+
+.tiles{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end}
+.tiles figure{margin:0;display:grid;justify-items:center;gap:9px}
+.tiles .tile{border-radius:16%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tiles .tile.v{background:var(--volt)}
+.tiles .tile.k{background:var(--volt-ink)}
+.tiles .tile.v svg{color:var(--volt-ink)}
+.tiles .tile.k svg{color:var(--volt)}
+.tiles svg{display:block}
+.tiles figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 18px}
+.verdict p{max-width:58ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--volt-ink);background:var(--volt);
+  padding:5px 11px;border-radius:1px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.next{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.next ol{margin:0;padding-left:20px;max-width:56ch}
+.next li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--volt-deep);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Round 06 — final direction</span>
+    </div>
+    <h1>Forty-five degrees,<br>all the way down<em>.</em></h1>
+    <p class="standfirst">The sheet you picked has one rule running through every glyph: nothing meets at 90° except the outer silhouette. Every terminal, every counter, every joint is cut at 45°. Here is your H built in exactly that grammar — three ways, and a clear answer.</p>
+  </header>
+
+  <div class="callout">
+    <p><strong>What that sheet is actually doing.</strong></p>
+    <p>Heavy bars, hexagonal counters, and — the move most people miss — <em>interlocking joints</em>. Where two strokes meet, one carries a 45° point and the other a matching notch, separated by a constant diagonal gap. That's why those letters look machined rather than drawn.</p>
+    <p>It's also the same idea we've been circling for five rounds: a kerf. I was cutting on the square. <strong>That sheet cuts on the diagonal, and it's simply better.</strong></p>
+  </div>
+
+  <div class="hero">
+    <div class="hero-mark"><svg id="hero" fill="none" aria-label="Hex H — the recommended mark"></svg></div>
+    <div class="hero-side">
+      <p class="eyebrow">The recommendation — Hex H</p>
+      <h2>An H that locks together</h2>
+      <p>The crossbar ends in a 45° point. Each pier carries the matching notch. They never touch — a constant diagonal gap runs between them, the same width at every joint.</p>
+      <p><strong>Nothing here is decoration.</strong> The point, the notch and the gap are one piece of geometry: change the crossbar height and all three move together, because the point angle is fixed at 45° and everything else follows.</p>
+      <p>Wisdom in this language isn't softness or age. It's precision — the mark reads as something cut by someone who measured first.</p>
+    </div>
+  </div>
+
+  <div class="bar">
+    <label><input type="checkbox" id="constr"> Show construction</label>
+    <label><input type="checkbox" id="invert"> Invert to volt-on-black</label>
+    <span class="spacer"></span>
+    <button id="reset" type="button">Reset all</button>
+  </div>
+
+  <!-- 01 HEX -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">01</span><h2>Hex H</h2>
+      <span class="axis">Joint — point and notch</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-hex"><svg id="svg-hex" fill="none" aria-label="Hex H"></svg></div>
+        <div class="dims" id="dims-hex"></div>
+        <div class="zoomwrap" id="zoom-hex"></div>
+        <div class="knobs" id="knobs-hex"></div>
+        <div class="scale" id="scale-hex"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Crossbar</b> — a hexagon, pointed both ends<br><b>Piers</b> — notched to receive it<br><b>Gap</b> — constant, diagonal, never closed</p>
+        <p class="lede">Three pieces that obviously belong together and <strong>deliberately don't touch.</strong></p>
+        <p>This is the full grammar of your reference sheet applied to a single letter. The counters come out hexagonal because the notch cuts into them at 45°, which is the exact quality that makes those glyphs feel machined rather than drawn — and it happens as a consequence here, not as a styling pass.</p>
+        <p>Drag the crossbar height. The point depth, the notch depth and the counter shape all move with it, because they're the same number. That's the difference between a system and a look.</p>
+        <p>Terminals give you the last decision: chamfer the counter side and the letter opens up, chamfer the outside and it reads as a cut plate, chamfer both and you get the octagonal silhouette closest to the sheet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 FACET -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">02</span><h2>Facet H</h2>
+      <span class="axis">Silhouette — one solid, all corners cut</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-facet"><svg id="svg-facet" fill="none" aria-label="Facet H"></svg></div>
+        <div class="dims" id="dims-facet"></div>
+        <div class="zoomwrap" id="zoom-facet"></div>
+        <div class="knobs" id="knobs-facet"></div>
+        <div class="scale" id="scale-facet"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>One piece</b> — no gaps anywhere<br><b>Every corner</b> — cut at 45°, by rule</p>
+        <p class="lede">The same language with the joints closed. <strong>Blunt, heavy, and impossible to break.</strong></p>
+        <p>No gaps means nothing to lose at small size, nothing to fill in when it's embroidered, nothing to explain to a printer. If Hex H is the mark you want, this is the mark that ships alongside it for the sizes and surfaces where a diagonal hairline can't survive.</p>
+        <p>It's also the safest single answer if you'd rather not run two files. It gives up the interlock — which is the most interesting thing in the reference — but keeps the faceted silhouette that makes the sheet feel like the sheet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 BLADE -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">03</span><h2>Blade H</h2>
+      <span class="axis">Energy — cuts all facing one way</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field" id="fld-blade"><svg id="svg-blade" fill="none" aria-label="Blade H"></svg></div>
+        <div class="dims" id="dims-blade"></div>
+        <div class="zoomwrap" id="zoom-blade"></div>
+        <div class="knobs" id="knobs-blade"></div>
+        <div class="scale" id="scale-blade"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Chamfers</b> — rotationally paired, not mirrored<br><b>Result</b> — a mark that turns without leaning</p>
+        <p class="lede">Cut the opposite corners instead of matching pairs and the letter <strong>rotates instead of standing still.</strong></p>
+        <p>This is the closest of the three to the energy of the green sheet, which is built almost entirely on rotational rather than mirror symmetry. It's the most alive and the least calm.</p>
+        <p>Which is exactly the tension worth naming. You asked for wisdom, and rotation reads as motion — the same problem the leaning marks had in round one, arriving through a different door. It's here because it's genuinely good and because you should see the trade rather than take my word for it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>The three, together</h2>
+    <p>Same weight, same proportions, same 45° rule. The only variable is whether the joints open, close, or rotate.</p>
+    <div class="compare" id="compare"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Across the brands</h2>
+    <p>The H holds; only the word after the slash changes. Shown on both grounds — volt is the signature, black is the workhorse.</p>
+    <div class="chooser" id="chooser" role="group" aria-label="Choose the mark"></div>
+    <div class="family" id="family"></div>
+  </section>
+
+  <section class="panel">
+    <h2>At the sizes people meet you</h2>
+    <p>Podcast tile, avatar, list row, favicon — on volt and knocked out of black. Watch the diagonal gap: this is where Hex H needs its second file.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Final — Hex H, with Facet H as the small-size cut</span>
+    <h2>One mark, two optical sizes</h2>
+    <p>Hex H is the answer. It takes the grammar you responded to and makes it structural rather than stylistic — the interlocking joint isn't a look applied to an H, it's the thing the H is built from. That's what will still hold up when this style stops being current, because the geometry was doing the work rather than the fashion.</p>
+    <p>Ship <strong>Facet H as its small-size sibling</strong>, exactly the way a typeface ships an optical size. Same silhouette, joints closed. Below roughly 24px, and on anything woven, etched or single-colour-printed, the diagonal gap is a liability — swap the file and nobody will ever notice the difference.</p>
+    <p>Blade H I'd keep for motion. Rotation is wrong for a static mark on a wisdom brand, but it's exactly right for the two frames where the logo assembles itself.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Role</th><th>Strongest at</th><th>Fails at</th></tr></thead>
+        <tbody>
+          <tr><td>01 Hex H</td><td>The mark</td><td>Anything above 24px; the interlock is the idea</td><td>Embroidery, etching, favicons</td></tr>
+          <tr><td>02 Facet H</td><td>Small-size cut</td><td>Every size and surface; nothing to lose</td><td>Gives up the interlock</td></tr>
+          <tr><td>03 Blade H</td><td>Motion only</td><td>Energy, assembly animation</td><td>Reads as movement, not stillness</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="next">
+      <p style="margin:0 0 14px"><strong>To finish this properly:</strong></p>
+      <ol>
+        <li>Trademark search on Hex H — classes covering media production and software. Still the step most likely to force a change, and still not done.</li>
+        <li>Lock the gap as a ratio of crossbar height, not an absolute, so it scales with any redraw.</li>
+        <li>Draw HYPER in the same grammar — every terminal at 45°, the same gap at every joint. That's when it stops being a logo and becomes an identity.</li>
+        <li>Optical pass at final size: 45° cuts read lighter than square ones, so the piers will want to be a touch wider than the maths says. Trust the eye over the numbers on the last pass.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var showConstr=false, inverted=false, active="hex";
+
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
+  function r2(v){return Math.round(v*100)/100;}
+  function pth(pts){return "M"+pts.map(function(p){return r2(p[0])+" "+r2(p[1]);}).join(" L")+" Z";}
+  function unit(p,q){var dx=q[0]-p[0],dy=q[1]-p[1],L=Math.hypot(dx,dy)||1;return [dx/L,dy/L,L];}
+
+  /* chamfer selected vertices of a polygon; equal offsets on perpendicular edges = 45 deg */
+  function chamfer(pts,sel,c){
+    if(c<=0) return pts.slice();
+    var out=[];
+    for(var i=0;i<pts.length;i++){
+      var P=pts[i];
+      if(sel.indexOf(i)<0){out.push(P);continue;}
+      var A=pts[(i-1+pts.length)%pts.length],B=pts[(i+1)%pts.length];
+      var uA=unit(P,A),uB=unit(P,B);
+      var cc=Math.min(c,uA[2]*0.47,uB[2]*0.47);
+      out.push([P[0]+uA[0]*cc,P[1]+uA[1]*cc]);
+      out.push([P[0]+uB[0]*cc,P[1]+uB[1]*cc]);
+    }
+    return out;
+  }
+
+  var DEFAULTS={
+    hex:{pier:27,bar:22,gap:5,cham:10,mode:"both"},
+    facet:{pier:27,bar:22,cham:11,mode:"both"},
+    blade:{pier:27,bar:22,cham:14}
+  };
+  var S=JSON.parse(JSON.stringify(DEFAULTS));
+
+  /* ---------- 01 HEX H ---------- */
+  function hexParts(p){
+    var w=p.pier,bh=p.bar,g=p.gap,cy=50,nd=bh/2;
+    var a=cy-bh/2,b=cy+bh/2;
+    var L=[[0,0],[w,0],[w,a],[w-nd,cy],[w,b],[w,100],[0,100]];
+    var R=[[100,0],[100-w,0],[100-w,a],[100-w+nd,cy],[100-w,b],[100-w,100],[100,100]];
+    var xL=w-nd+g, xR=100-w+nd-g;
+    var barOK = (xR-bh) > (xL+bh);
+    var bar = barOK ? [[xL,cy],[xL+nd,a],[xR-nd,a],[xR,cy],[xR-nd,b],[xL+nd,b]] : null;
+    return {L:L,R:R,bar:bar,nd:nd,a:a,b:b,xL:xL,xR:xR};
+  }
+  var HEX_SEL={both:[0,1,5,6],inner:[1,5],outer:[0,6],none:[]};
+  function buildHex(p,plain){
+    var out=[],N=hexParts(p),sel=HEX_SEL[p.mode]||[];
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      out.push(el("line",{x1:-6,y1:50,x2:106,y2:50,class:"c-line"}));
+      out.push(el("line",{x1:r2(N.xL-14),y1:r2(50-14),x2:r2(N.xL+14),y2:r2(50+14),class:"c-path"}));
+      out.push(el("line",{x1:r2(N.xL-14),y1:r2(50+14),x2:r2(N.xL+14),y2:r2(50-14),class:"c-path"}));
+    }
+    out.push(el("path",{d:pth(chamfer(N.L,sel,p.cham)),fill:"currentColor"}));
+    out.push(el("path",{d:pth(chamfer(N.R,sel,p.cham)),fill:"currentColor"}));
+    if(N.bar) out.push(el("path",{d:pth(N.bar),fill:"currentColor"}));
+    return out;
+  }
+
+  /* ---------- 02 FACET H (solid) ---------- */
+  function hPoly(w,bh){
+    var a=50-bh/2,b=50+bh/2;
+    return [[0,0],[w,0],[w,a],[100-w,a],[100-w,0],[100,0],
+            [100,100],[100-w,100],[100-w,b],[w,b],[w,100],[0,100]];
+  }
+  var FC_SEL={both:[0,1,4,5,6,7,10,11],inner:[1,4,7,10],outer:[0,5,6,11],
+              counter:[2,3,8,9],all:[0,1,2,3,4,5,6,7,8,9,10,11]};
+  function buildFacet(p,plain){
+    var out=[],pts=hPoly(p.pier,p.bar),sel=FC_SEL[p.mode]||FC_SEL.both;
+    if(showConstr&&!plain) out.push(el("path",{d:pth(pts),class:"c-line"}));
+    out.push(el("path",{d:pth(chamfer(pts,sel,p.cham)),fill:"currentColor"}));
+    return out;
+  }
+
+  /* ---------- 03 BLADE H (rotational chamfers) ---------- */
+  function buildBlade(p,plain){
+    var out=[],pts=hPoly(p.pier,p.bar);
+    if(showConstr&&!plain){
+      out.push(el("path",{d:pth(pts),class:"c-line"}));
+      out.push(el("line",{x1:-6,y1:106,x2:106,y2:-6,class:"c-path"}));
+    }
+    out.push(el("path",{d:pth(chamfer(pts,[0,4,6,10],p.cham)),fill:"currentColor"}));
+    return out;
+  }
+
+  var B={hex:buildHex,facet:buildFacet,blade:buildBlade};
+  var KEYS=["hex","facet","blade"];
+  var NAMES={hex:"Hex H",facet:"Facet H",blade:"Blade H"};
+  var VB="-5 -5 110 110";
+
+  function styleC(svg){
+    svg.querySelectorAll(".c-line").forEach(function(n){
+      n.setAttribute("stroke","currentColor");n.setAttribute("stroke-width",".5");
+      n.setAttribute("stroke-dasharray","2.5 2.5");n.setAttribute("fill","none");n.setAttribute("opacity",".45");
+    });
+    svg.querySelectorAll(".c-path").forEach(function(n){
+      n.setAttribute("stroke","currentColor");n.setAttribute("stroke-width",".9");
+      n.setAttribute("fill","none");n.setAttribute("opacity",".55");
+    });
+  }
+
+  function dims(k){
+    var p=S[k];
+    if(k==="hex"){var N=hexParts(p);
+      return ["pier "+p.pier,"crossbar "+p.bar,"point/notch "+r2(N.nd),
+              "gap "+p.gap,"chamfer "+p.cham,"terminals "+p.mode];}
+    if(k==="facet") return ["pier "+p.pier,"crossbar "+p.bar,"chamfer "+p.cham,"corners "+p.mode];
+    return ["pier "+p.pier,"crossbar "+p.bar,"chamfer "+p.cham,"corners rotational"];
+  }
+
+  function markSvg(k,px){
+    var s=el("svg",{viewBox:VB,width:px,height:px,fill:"none"});
+    B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+    return s;
+  }
+
+  var ZOOMS=[{vb:"-3 -3 32 32",cap:"Top terminal"},
+             {vb:"6 32 40 40",cap:"The joint"},
+             {vb:"70 70 33 33",cap:"Foot"}];
+  function renderZoom(k){
+    var host=document.getElementById("zoom-"+k); host.textContent="";
+    ZOOMS.forEach(function(z){
+      var fig=document.createElement("figure");
+      var box=document.createElement("div"); box.className="z";
+      var s=el("svg",{viewBox:z.vb,fill:"none",preserveAspectRatio:"xMidYMid meet"});
+      B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+      box.appendChild(s);
+      var c=document.createElement("figcaption"); c.textContent=z.cap;
+      fig.appendChild(box); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  var SCALES=[20,28,44,72];
+  function render(k){
+    var fld=document.getElementById("fld-"+k);
+    fld.style.background = inverted ? "var(--volt-ink)" : "var(--volt)";
+    var svg=document.getElementById("svg-"+k);
+    svg.textContent=""; svg.setAttribute("viewBox",VB);
+    svg.style.color = inverted ? "var(--volt)" : "var(--volt-ink)";
+    B[k](S[k],false).forEach(function(n){svg.appendChild(n);});
+    styleC(svg);
+
+    var d=document.getElementById("dims-"+k); d.textContent="";
+    dims(k).forEach(function(t){var s=document.createElement("span");s.textContent=t;d.appendChild(s);});
+
+    renderZoom(k);
+
+    var strip=document.getElementById("scale-"+k); strip.textContent="";
+    SCALES.forEach(function(px){
+      var fig=document.createElement("figure");
+      var sq=document.createElement("div"); sq.className="sq";
+      var pad=Math.max(4,Math.round(px*0.18));
+      sq.style.width=(px+pad*2)+"px"; sq.style.height=(px+pad*2)+"px";
+      sq.appendChild(markSvg(k,px));
+      var c=document.createElement("figcaption"); c.textContent=px+" px";
+      fig.appendChild(sq); fig.appendChild(c); strip.appendChild(fig);
+    });
+
+    if(k==="hex"){
+      var hero=document.getElementById("hero");
+      hero.textContent=""; hero.setAttribute("viewBox",VB);
+      buildHex(S.hex,true).forEach(function(n){hero.appendChild(n);});
+    }
+    renderCompare();
+    if(k===active){renderFamily();renderTiles();}
+  }
+
+  function renderCompare(){
+    var host=document.getElementById("compare"); host.textContent="";
+    KEYS.forEach(function(k){
+      var fig=document.createElement("figure");
+      var box=document.createElement("div"); box.className="c";
+      box.appendChild(markSvg(k,118));
+      var c=document.createElement("figcaption"); c.textContent=NAMES[k];
+      fig.appendChild(box); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  var BRANDS=[
+    {sub:"Pod",note:"Podcast visuals<br>HP-3 → HP-10",ground:"on-volt"},
+    {sub:"Library",note:"Archive<br>Back catalogue",ground:"on-ink"},
+    {sub:"Brand",note:"Identity work<br>Client-facing",ground:"on-volt"}
+  ];
+  function renderFamily(){
+    var host=document.getElementById("family"); host.textContent="";
+    BRANDS.forEach(function(b){
+      var row=document.createElement("div"); row.className="lock "+b.ground;
+      row.appendChild(markSvg(active,46));
+      var wm=document.createElement("div"); wm.className="wm";
+      wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b.sub+'</span>';
+      row.appendChild(wm);
+      var d=document.createElement("div"); d.className="desc"; d.innerHTML=b.note;
+      row.appendChild(d); host.appendChild(row);
+    });
+  }
+
+  var TILES=[{px:96,cap:"96 — podcast tile",g:"v"},{px:56,cap:"56 — avatar",g:"k"},
+             {px:32,cap:"32 — list row",g:"v"},{px:18,cap:"18 — favicon",g:"k"}];
+  function renderTiles(){
+    var host=document.getElementById("tiles"); host.textContent="";
+    TILES.forEach(function(t){
+      var fig=document.createElement("figure");
+      var tile=document.createElement("div"); tile.className="tile "+t.g;
+      tile.style.width=t.px+"px"; tile.style.height=t.px+"px";
+      tile.appendChild(markSvg(active,Math.round(t.px*0.56)));
+      var c=document.createElement("figcaption"); c.textContent=t.cap;
+      fig.appendChild(tile); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  function buildChooser(){
+    var host=document.getElementById("chooser"); host.textContent="";
+    KEYS.forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.textContent=NAMES[k];
+      b.setAttribute("aria-pressed",String(k===active));
+      b.addEventListener("click",function(){
+        active=k;
+        host.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        renderFamily(); renderTiles();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  var SPEC={
+    hex:[{k:"gap",label:"Diagonal gap at the joint",min:0,max:11,step:.5},
+         {k:"bar",label:"Crossbar height — drives point + notch",min:14,max:32,step:1},
+         {k:"pier",label:"Pier width",min:20,max:34,step:1},
+         {k:"cham",label:"Terminal chamfer",min:0,max:18,step:.5},
+         {k:"mode",label:"Which terminals",type:"seg",
+           options:[["both","Both"],["inner","Counter"],["outer","Outer"],["none","None"]]}],
+    facet:[{k:"cham",label:"Chamfer size",min:0,max:18,step:.5},
+         {k:"mode",label:"Which corners",type:"seg",
+           options:[["both","Both"],["outer","Outer"],["counter","Counters"],["all","All"]]},
+         {k:"pier",label:"Pier width",min:20,max:34,step:1},
+         {k:"bar",label:"Crossbar height",min:14,max:32,step:1}],
+    blade:[{k:"cham",label:"Chamfer size",min:0,max:22,step:.5},
+         {k:"pier",label:"Pier width",min:20,max:34,step:1},
+         {k:"bar",label:"Crossbar height",min:14,max:32,step:1}]
+  };
+  function knobs(k){
+    var host=document.getElementById("knobs-"+k); host.textContent="";
+    SPEC[k].forEach(function(sp){
+      var wrap=document.createElement("div"); wrap.className="knob";
+      var nm=document.createElement("span"); nm.className="k-name"; nm.textContent=sp.label;
+      var vl=document.createElement("span"); vl.className="k-val";
+      wrap.appendChild(nm); wrap.appendChild(vl);
+      if(sp.type==="seg"){
+        var seg=document.createElement("div"); seg.className="seg";
+        sp.options.forEach(function(o){
+          var b=document.createElement("button"); b.type="button"; b.textContent=o[1];
+          b.setAttribute("aria-pressed",String(S[k][sp.k]===o[0]));
+          b.addEventListener("click",function(){
+            S[k][sp.k]=o[0];
+            seg.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+            b.setAttribute("aria-pressed","true"); render(k);
+          });
+          seg.appendChild(b);
+        });
+        wrap.appendChild(seg);
+      }else{
+        var inp=document.createElement("input");
+        inp.type="range";inp.min=sp.min;inp.max=sp.max;inp.step=sp.step;
+        inp.value=S[k][sp.k];inp.setAttribute("aria-label",sp.label);
+        vl.textContent=Number(S[k][sp.k]).toFixed(sp.step<1?1:0);
+        inp.addEventListener("input",function(){
+          S[k][sp.k]=parseFloat(inp.value);
+          vl.textContent=Number(inp.value).toFixed(sp.step<1?1:0);
+          render(k);
+        });
+        wrap.appendChild(inp);
+      }
+      host.appendChild(wrap);
+    });
+  }
+
+  function renderAll(){KEYS.forEach(render);}
+  document.getElementById("constr").addEventListener("change",function(e){showConstr=e.target.checked;renderAll();});
+  document.getElementById("invert").addEventListener("change",function(e){inverted=e.target.checked;renderAll();});
+  document.getElementById("reset").addEventListener("click",function(){
+    S=JSON.parse(JSON.stringify(DEFAULTS)); KEYS.forEach(knobs); renderAll();
+  });
+
+  KEYS.forEach(knobs); buildChooser(); renderAll();
+})();
+</script>

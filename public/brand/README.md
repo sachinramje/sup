@@ -196,3 +196,55 @@ they were doing. It also yields a single number the whole identity can inherit.
    survives 16px — and switch below ~24px.
 4. Optical correction at final scale: slanted terminals read heavier than flat ones, so
    the piers want to be a hair narrower than the maths says.
+
+---
+
+# Round 06 — the 45° grammar (final direction)
+
+Built to the reference sheet the client selected: heavy bars, hexagonal counters, and
+**interlocking joints** — where two strokes meet, one carries a 45° point and the other a
+matching notch, separated by a constant diagonal gap. Nothing meets at 90° except the
+outer silhouette.
+
+This is the same kerf idea from rounds 03–05, cut on the diagonal instead of the square.
+
+| File | Mark | Role |
+| --- | --- | --- |
+| `hv-v1-hex.svg` | Hex H | **The mark.** Pointed crossbar, notched piers, constant diagonal gap. |
+| `hv-v2-facet.svg` | Facet H | Small-size cut. Same silhouette, joints closed. |
+| `hv-v3-blade.svg` | Blade H | Motion only. Rotational chamfers. |
+
+`h-volt.html` presents all three parametrically on volt, with joint zooms, the sub-brand
+family on both grounds, and tiles at 96/56/32/18px.
+
+## Constants at the defaults exported here
+
+- **Hex H** — pier 27, crossbar 22, diagonal gap 5, terminal chamfer 10, both terminals
+  chamfered. Point depth and notch depth are both `crossbar / 2`, so the 45° angle is
+  exact and the counters come out hexagonal as a consequence rather than a styling pass.
+  Change the crossbar and point, notch and counter all move together.
+- **Facet H** — pier 27, crossbar 22, chamfer 11, all eight outer corners. No gaps, so
+  nothing to lose at small size, in embroidery, or in single-colour print.
+- **Blade H** — pier 27, crossbar 22, chamfer 14 on rotationally paired corners
+  (0/4/6/10). Reads as rotation rather than stillness — kept for motion, not for the
+  static mark.
+
+## Colourway
+
+Black `#0C0E10` on volt `#CCFF00` as the signature; volt on black as the workhorse
+inverse. Marks use `fill="currentColor"`.
+
+## Recommendation
+
+**Hex H as the mark, Facet H as its small-size sibling** — shipped the way a typeface
+ships an optical size. Below ~24px, and on anything woven, etched or single-colour
+printed, swap the file; the diagonal gap is a liability there and nobody will notice.
+
+## Next
+
+1. Trademark search on Hex H, classes covering media production and software. Still
+   outstanding, still the step most likely to force a change.
+2. Lock the gap as a ratio of crossbar height, not an absolute.
+3. Draw HYPER in the same grammar — every terminal at 45°, the same gap at every joint.
+4. Optical pass at final size: 45° cuts read lighter than square ones, so the piers will
+   want to be a touch wider than the maths says.
