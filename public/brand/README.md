@@ -318,3 +318,51 @@ Take Ruled's doubled bar as the layout device regardless of which mark wins.
 2. Cut the solid small-size sibling into the build pipeline; switch below 32px.
 3. Extend the flute rhythm into the pattern system.
 4. Test the H alone against three competitors' avatars at 40px, side by side.
+
+---
+
+# Round 08 — constructed, not styled
+
+**The diagnosis:** every mark in rounds 04–07 was the same drawing — two rectangles and a
+bar — with a different edge treatment applied on top. Chamfer, radius, nib, flute: the
+underlying shape never changed. That is styling, and it is why they read as interchangeable.
+
+The selected reference sheet doesn't work that way. Those glyphs are *constructed* —
+hexagonal silhouettes, wedge counters, forms that interlock and split. These four are
+built from the geometry up.
+
+| File | Mark | Built from | Role |
+| --- | --- | --- | --- |
+| `hv-c1-interlock.svg` | Interlock | One polygon, placed twice at 180° | **The mark.** |
+| `hv-c2-hexagon.svg` | Hexagon | A faceted six-sided silhouette | Close second; free badge shape |
+| `hv-c3-seam.svg` | Seam | One 45° cut, corner to corner | Boldest gesture |
+| `hv-c4-block.svg` | Block | All twelve corners cut at 45° | Most durable; any surface |
+
+`h-constructed.html` shows all four finished at size on volt and black, with the sub-brand
+family. No sliders — these are resolved marks, not parameter spaces.
+
+## Constants
+
+- **Interlock** — 92×100, pier 26, crossbar band y 38–62, 45° seam with a constant 6-unit
+  gap, outer corners cut 16. The second piece is the first rotated 180° about the centre:
+  because an H is already rotationally symmetric, a single 45° cut through its centre
+  yields two identical halves. The wedge tips are intentional — each crossbar half tapers
+  as it crosses, so the bar reads as one band with a diagonal split.
+- **Hexagon** — silhouette inset 18 at top and bottom, counters tapering from 20 wide at
+  the ends to 12 at the crossbar. Piers run thin at the ends and heavy at the waist.
+- **Seam** — pier 30, crossbar 26, no chamfers. A single 45° kerf 9.9 units wide (7
+  perpendicular) runs corner to corner, disappearing across the counters. Implemented as
+  an SVG mask so it works on any ground.
+- **Block** — pier 32, crossbar 26, all twelve vertices cut 12. Cutting the *counter*
+  corners as well as the outer ones is what turns the negative space hexagonal — the
+  detail earlier chamfered versions missed.
+
+## Colourway
+
+Black `#0C0E10` on volt `#CCFF00`; volt on black as the inverse.
+
+## Recommendation
+
+**Interlock.** The only one whose construction is discovered rather than imposed — there is
+no styling decision in it to date. Hexagon is the close second and the most immediately
+striking.

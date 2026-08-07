@@ -1,0 +1,310 @@
+<title>HyperVisuals — Four Constructed H's</title>
+<style>
+:root{
+  --ink:#15181C; --ink-soft:#4E555C;
+  --paper:#E6E7E3; --rule:#C8CBC5; --rule-soft:#D8DBD5;
+  --volt:#CCFF00; --black:#0C0E10; --accent:#7E9E00;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8E958D;--paper:#0E1113;
+    --rule:#2D3339;--rule-soft:#242A30;--accent:#CCFF00;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8E958D;--paper:#0E1113;
+  --rule:#2D3339;--rule-soft:#242A30;--accent:#CCFF00;}
+:root[data-theme="light"]{--ink:#15181C;--ink-soft:#4E555C;--paper:#E6E7E3;
+  --rule:#C8CBC5;--rule-soft:#D8DBD5;--accent:#7E9E00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1020px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:32px}
+.slug{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+.slug span{background:var(--volt);color:var(--black);padding:4px 9px;border-radius:1px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,56px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+.diag{border-left:3px solid var(--volt);padding:18px 22px;margin:0 0 46px;max-width:66ch;
+  background:color-mix(in srgb,var(--volt) 9%,transparent)}
+.diag p{margin:0 0 12px}.diag p:last-child{margin:0}
+.diag strong{font-weight:600}
+
+.hero{background:var(--volt);border-radius:2px;padding:clamp(28px,6vw,60px);
+  margin-bottom:clamp(48px,8vw,84px);display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.05fr);gap:clamp(26px,5vw,54px);align-items:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.hero .m svg{display:block;width:100%;height:auto;color:var(--black)}
+.hero .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--black);opacity:.55;margin:0 0 14px}
+.hero h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(22px,3.6vw,34px);letter-spacing:-.025em;line-height:1.02;
+  margin:0 0 16px;color:var(--black)}
+.hero p{margin:0 0 14px;color:var(--black);opacity:.76;font-size:16px;max-width:40ch}
+.hero p:last-child{margin:0}
+.hero strong{opacity:1;font-weight:600}
+
+.plate{margin-bottom:clamp(52px,8vw,92px)}
+.plate-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:26px}
+.idx{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  background:var(--volt);color:var(--black);padding:3px 7px;border-radius:1px}
+.plate-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,29px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(250px,.85fr) minmax(300px,1.15fr);
+  gap:clamp(24px,4vw,46px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.big{background:var(--volt);border-radius:2px;padding:clamp(24px,5vw,44px);
+  display:flex;align-items:center;justify-content:center}
+.big svg{display:block;width:100%;max-width:230px;height:auto;color:var(--black)}
+.row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-end}
+.row figure{margin:0;display:grid;justify-items:center;gap:7px}
+.row .cell{border-radius:2px;display:flex;align-items:center;justify-content:center}
+.row .v{background:var(--volt)}.row .k{background:var(--black)}
+.row .v svg{color:var(--black)}.row .k svg{color:var(--volt)}
+.row svg{display:block}
+.row figcaption{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink-soft)}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}.lede strong{font-weight:600}
+.built{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:3px solid var(--volt);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9}
+.built b{color:var(--ink);font-weight:400}
+
+.panel{border-top:1.5px solid var(--ink);padding-top:26px;margin-bottom:clamp(46px,8vw,80px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,29px);letter-spacing:-.02em;margin:0 0 14px}
+.panel > p{max-width:60ch;margin:0 0 26px}
+.family{border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px);
+  padding:clamp(16px,3vw,24px) clamp(16px,3vw,26px);border-bottom:1px solid var(--rule)}
+.lock:last-child{border-bottom:none}
+.lock.v{background:var(--volt)}.lock.k{background:var(--black)}
+.lock.v svg,.lock.v .wm{color:var(--black)}
+.lock.k svg,.lock.k .wm{color:var(--volt)}
+.lock svg{display:block;flex:none}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,3vw,26px);letter-spacing:-.02em;line-height:1}
+.lock .wm .sl{font-weight:400;opacity:.45;padding:0 .06em}
+.lock .wm .sub{opacity:.55}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,29px);letter-spacing:-.02em;margin:0 0 18px}
+.verdict p{max-width:58ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--black);background:var(--volt);
+  padding:5px 11px;border-radius:1px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.ask{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.ask ol{margin:0;padding-left:20px;max-width:56ch}
+.ask li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Round 08 — rebuilt</span>
+    </div>
+    <h1>Constructed,<br>not styled<em>.</em></h1>
+    <p class="standfirst">Four H's built from scratch on new geometry. No sliders, no variants — finished marks, at size, on the ground you picked.</p>
+  </header>
+
+  <div class="diag">
+    <p><strong>What was wrong with everything I showed you before.</strong></p>
+    <p>Every one of them was the same drawing: two rectangles and a bar, with a different edge treatment applied on top. Chamfer it, round it, flute it — the underlying shape never changed. That's styling, and styling is why they all felt interchangeable.</p>
+    <p>The sheet you picked doesn't work that way. Those glyphs are <em>constructed</em> — the silhouette is hexagonal, the counters are wedges, forms interlock and split. The letter is <strong>invented, not decorated.</strong> These four are built that way.</p>
+  </div>
+
+  <div class="hero">
+    <div class="m" id="hero"></div>
+    <div>
+      <p class="eyebrow">The recommendation — Interlock H</p>
+      <h2>Two identical pieces, turned to face each other</h2>
+      <p>The mark is <strong>one shape, drawn twice</strong> — the second is the first rotated a half turn. Together they make the letter; the diagonal between them is where they meet.</p>
+      <p>That's the whole construction. Nothing was added to make it interesting, and nothing can be removed without losing the H.</p>
+      <p>It also says the thing you actually sell: two halves nobody had put together, and the seam that proves it took a decision.</p>
+    </div>
+  </div>
+
+  <div id="plates"></div>
+
+  <section class="panel">
+    <h2>Across the brands</h2>
+    <p>One H, every product. Volt is the signature; black is the workhorse.</p>
+    <div class="family" id="family"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Recommendation — 01 Interlock</span>
+    <h2>The only one with a construction you can't argue with</h2>
+    <p>Hexagon is the most immediately striking and I'd take it as a close second. Block is the safest. Seam is the boldest single gesture. But Interlock is the only one where the construction is <em>discovered</em> rather than imposed — the H was always two identical halves, and nobody had cut it there.</p>
+    <p>That matters for a mark meant to last, because there's no styling decision in it to go out of date. Change the weight, change the angle, redraw it in twenty years — <strong>it's still one shape placed twice.</strong></p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Built from</th><th>Best at</th><th>Watch</th></tr></thead>
+        <tbody>
+          <tr><td>01 Interlock</td><td>One polygon, rotated</td><td>Idea and construction</td><td>Wedge tips thin below ~28px</td></tr>
+          <tr><td>02 Hexagon</td><td>A faceted silhouette</td><td>Impact; free badge shape</td><td>Piers vary a lot in width</td></tr>
+          <tr><td>03 Seam</td><td>One uninterrupted cut</td><td>Boldness</td><td>Loudest of the four</td></tr>
+          <tr><td>04 Block</td><td>Twelve cut corners</td><td>Durability; any surface</td><td>Least distinctive silhouette</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ask">
+      <p style="margin:0 0 14px"><strong>If none of these land either, tell me which is true — it'll save us both a round:</strong></p>
+      <ol>
+        <li>The letterform itself is the problem, and you'd rather go back to an abstract symbol.</li>
+        <li>The geometry is fine but too austere — you want colour, depth or dimension in the mark itself.</li>
+        <li>You're reacting to something specific you've seen elsewhere. Send it and I'll work from that directly rather than guessing.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var VB="-6 -6 104 112", AR=104/112;
+
+  var MARKS=[
+    {id:"interlock", name:"Interlock", axis:"One piece, rotated",
+     paths:[
+       "M0 12.22 L12.22 0 L26 0 L26 38 L55 38 L31 62 L26 62 L26 100 L12.22 100 L0 87.78 Z",
+       "M92 87.78 L79.78 100 L66 100 L66 62 L37 62 L61 38 L66 38 L66 0 L79.78 0 L92 12.22 Z"
+     ],
+     built:"<b>One polygon</b> — placed twice, 180° apart<br><b>The seam</b> — a 45° gap, constant width<br><b>Corners</b> — cut on the outer diagonal only",
+     copy:[
+       "Each piece is a pier <em>plus half the crossbar.</em> <strong>Neither one is a letter on its own.</strong>",
+       "Because the H is already rotationally symmetric, a single 45° cut through its centre produces two identical halves. That isn't a trick I applied — it's a property of the letter that was sitting there the whole time, and this is the only mark that uses it.",
+       "The wedge tips are deliberate. Each crossbar half tapers as it crosses, so the bar reads as one band with a diagonal split rather than two bars nudged together."
+     ]},
+    {id:"hexagon", name:"Hexagon", axis:"Faceted silhouette",
+     paths:["M18 0 L74 0 L92 50 L74 100 L18 100 L0 50 Z M36 0 L56 0 L52 38 L40 38 Z M40 62 L52 62 L56 100 L36 100 Z"],
+     evenodd:true,
+     built:"<b>Outline</b> — a hexagon, not a rectangle<br><b>Counters</b> — wedges, narrowing inward<br><b>Piers</b> — thin at the ends, heavy at the waist",
+     copy:[
+       "The silhouette stops being a box. <strong>That alone changes everything.</strong>",
+       "Every mark I showed you sat inside a rectangle, which is why they read as icons rather than objects. A hexagonal outline reads as a cut stone, a seal, a stamp — and it hands you a badge shape for free on every tile and avatar.",
+       "The counters taper toward the crossbar, so the piers thicken as they descend to the waist. That's the faceting logic of the sheet you picked, working on the whole silhouette instead of only the corners."
+     ]},
+    {id:"seam", name:"Seam", axis:"One cut, edge to edge",
+     paths:["M0 0 L30 0 L30 37 L62 37 L62 0 L92 0 L92 100 L62 100 L62 63 L30 63 L30 100 L0 100 Z"],
+     mask:"M101.05 -10 L110.95 -10 L-9.05 110 L-18.95 110 Z",
+     built:"<b>One heavy H</b> — no chamfers at all<br><b>One kerf</b> — 45°, corner to corner, uninterrupted",
+     copy:[
+       "A single cut runs the full diagonal of the mark. <strong>It doesn't stop for anything.</strong>",
+       "Where it crosses a stroke you see it; where it crosses a counter it disappears and picks up again on the other side. Your eye completes the line across the gaps, which is the most active thing any of these four asks of a viewer.",
+       "The boldest and the most brutal. It's also the closest to a single gesture — one decision executed all the way through, with no adjustments. That's either exactly your register or slightly too much of it."
+     ]},
+    {id:"block", name:"Block", axis:"Maximum weight",
+     paths:["M0 12 L12 0 L20 0 L32 12 L32 25 L44 37 L48 37 L60 25 L60 12 L72 0 L80 0 L92 12 L92 88 L80 100 L72 100 L60 88 L60 75 L48 63 L44 63 L32 75 L32 88 L20 100 L12 100 L0 88 Z"],
+     built:"<b>Every corner</b> — all twelve, cut at 45°<br><b>Counters</b> — hexagonal, because the cuts reach them",
+     copy:[
+       "Cut the inside corners as hard as the outside and <strong>the counters turn into hexagons.</strong>",
+       "That's the detail I kept missing. The earlier chamfered versions only touched the outer silhouette, which is why they read as a bevel filter. Cutting the counters too is what gives your reference sheet its density — the negative space gets faceted along with the positive.",
+       "Heaviest of the four, and the one that survives anything: no gaps, no seams, no thin passages. If one of these has to work embroidered on a cap at 8mm, it's this."
+     ]}
+  ];
+
+  var NS="http://www.w3.org/2000/svg", uid=0;
+  function svgFor(m, w){
+    var s=document.createElementNS(NS,"svg");
+    s.setAttribute("viewBox",VB); s.setAttribute("fill","none");
+    if(w){ s.setAttribute("width",Math.round(w*AR)); s.setAttribute("height",w); }
+    var maskId=null;
+    if(m.mask){
+      maskId="mk"+(++uid);
+      var defs=document.createElementNS(NS,"defs");
+      var mk=document.createElementNS(NS,"mask"); mk.setAttribute("id",maskId);
+      var r=document.createElementNS(NS,"rect");
+      r.setAttribute("x",-20);r.setAttribute("y",-20);
+      r.setAttribute("width",140);r.setAttribute("height",150);r.setAttribute("fill","#fff");
+      var bp=document.createElementNS(NS,"path");
+      bp.setAttribute("d",m.mask); bp.setAttribute("fill","#000");
+      mk.appendChild(r); mk.appendChild(bp); defs.appendChild(mk); s.appendChild(defs);
+    }
+    m.paths.forEach(function(d){
+      var p=document.createElementNS(NS,"path");
+      p.setAttribute("d",d); p.setAttribute("fill","currentColor");
+      if(m.evenodd) p.setAttribute("fill-rule","evenodd");
+      if(maskId) p.setAttribute("mask","url(#"+maskId+")");
+      s.appendChild(p);
+    });
+    return s;
+  }
+
+  /* hero */
+  document.getElementById("hero").appendChild(svgFor(MARKS[0]));
+
+  /* plates */
+  var SIZES=[{px:84,g:"v"},{px:52,g:"k"},{px:30,g:"v"}];
+  var host=document.getElementById("plates");
+  MARKS.forEach(function(m,i){
+    var sec=document.createElement("section"); sec.className="plate";
+    var head=document.createElement("div"); head.className="plate-head";
+    head.innerHTML='<span class="idx">0'+(i+1)+'</span><h2>'+m.name+'</h2>'+
+                   '<span class="axis">'+m.axis+'</span>';
+    sec.appendChild(head);
+
+    var grid=document.createElement("div"); grid.className="grid";
+    var left=document.createElement("div");
+    var big=document.createElement("div"); big.className="big";
+    big.appendChild(svgFor(m)); left.appendChild(big);
+
+    var row=document.createElement("div"); row.className="row";
+    SIZES.forEach(function(sz){
+      var fig=document.createElement("figure");
+      var cell=document.createElement("div"); cell.className="cell "+sz.g;
+      var box=Math.round(sz.px*1.55);
+      cell.style.width=box+"px"; cell.style.height=box+"px";
+      cell.appendChild(svgFor(m,sz.px));
+      var cap=document.createElement("figcaption"); cap.textContent=box+" px";
+      fig.appendChild(cell); fig.appendChild(cap); row.appendChild(fig);
+    });
+    left.appendChild(row);
+    grid.appendChild(left);
+
+    var right=document.createElement("div"); right.className="rationale";
+    var b=document.createElement("p"); b.className="built"; b.innerHTML=m.built;
+    right.appendChild(b);
+    m.copy.forEach(function(t,j){
+      var p=document.createElement("p");
+      if(j===0) p.className="lede";
+      p.innerHTML=t; right.appendChild(p);
+    });
+    grid.appendChild(right);
+    sec.appendChild(grid);
+    host.appendChild(sec);
+  });
+
+  /* family */
+  var fam=document.getElementById("family");
+  [["Pod","v"],["Library","k"],["Brand","v"]].forEach(function(b){
+    var row=document.createElement("div"); row.className="lock "+b[1];
+    row.appendChild(svgFor(MARKS[0],45));
+    var wm=document.createElement("div"); wm.className="wm";
+    wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b[0]+'</span>';
+    row.appendChild(wm); fam.appendChild(row);
+  });
+})();
+</script>
