@@ -1,0 +1,591 @@
+<title>HyperVisuals — Three Marks for Depth, Structure, Patience</title>
+<style>
+:root{
+  --ink:#14171B;
+  --ink-soft:#4C545C;
+  --paper:#E4E6E2;
+  --plate:#EFF0ED;
+  --rule:#C6CAC4;
+  --rule-soft:#D6D9D3;
+  --redline:#A93A29;
+  --redline-soft:#A93A2933;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#EAECE7;
+    --ink-soft:#8C948C;
+    --paper:#101316;
+    --plate:#171B1F;
+    --rule:#2C3238;
+    --rule-soft:#232930;
+    --redline:#E06B54;
+    --redline-soft:#E06B5433;
+    --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000000;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EAECE7; --ink-soft:#8C948C; --paper:#101316; --plate:#171B1F;
+  --rule:#2C3238; --rule-soft:#232930; --redline:#E06B54; --redline-soft:#E06B5433;
+  --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000000;
+}
+:root[data-theme="light"]{
+  --ink:#14171B; --ink-soft:#4C545C; --paper:#E4E6E2; --plate:#EFF0ED;
+  --rule:#C6CAC4; --rule-soft:#D6D9D3; --redline:#A93A29; --redline-soft:#A93A2933;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:14px}
+.slug{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--redline);display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:26px
+}
+.slug span{white-space:nowrap}
+h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(30px,6vw,58px);line-height:.98;letter-spacing:-.035em;
+  margin:0 0 18px;text-wrap:balance;text-transform:uppercase;
+}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+/* ---------- controls bar ---------- */
+.bar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;
+  padding:12px 0;border-bottom:1px solid var(--rule);margin-bottom:56px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase
+}
+.bar label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;color:var(--ink-soft)}
+.bar input[type=checkbox]{accent-color:var(--redline);width:14px;height:14px;cursor:pointer}
+.bar button{
+  font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  background:none;border:1px solid var(--rule);color:var(--ink-soft);
+  padding:5px 12px;border-radius:2px;transition:border-color .15s,color .15s
+}
+.bar button:hover{border-color:var(--redline);color:var(--redline)}
+.bar .spacer{flex:1}
+
+/* ---------- plate ---------- */
+.plate{margin-bottom:clamp(56px,9vw,104px)}
+.plate-head{
+  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px
+}
+.idx{font-family:var(--mono);font-size:12px;color:var(--redline);letter-spacing:.1em}
+.plate-head h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,30px);letter-spacing:-.02em;margin:0
+}
+.axis{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto
+}
+.grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.05fr);gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.field{
+  background:var(--plate);border:1px solid var(--rule);border-radius:2px;
+  padding:clamp(20px,4vw,38px);box-shadow:var(--shadow)
+}
+.field svg{display:block;width:100%;height:auto;color:var(--ink)}
+.dims{
+  margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 18px;font-variant-numeric:tabular-nums
+}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}
+.lede strong{font-weight:600}
+.reads{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:2px solid var(--redline);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9
+}
+.reads b{color:var(--ink);font-weight:400}
+
+/* ---------- sliders ---------- */
+.knobs{margin-top:24px;display:grid;gap:14px}
+.knob{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+.knob .k-name{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-soft)
+}
+.knob .k-val{font-family:var(--mono);font-size:10.5px;color:var(--redline);font-variant-numeric:tabular-nums}
+.knob input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--redline);height:18px;cursor:pointer}
+.seg{grid-column:1/-1;display:flex;gap:0;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{
+  flex:1;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 4px;background:none;border:none;border-right:1px solid var(--rule);
+  color:var(--ink-soft);cursor:pointer;transition:background .15s,color .15s
+}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed="true"]{background:var(--redline);color:var(--plate)}
+
+/* ---------- scale test ---------- */
+.scale{
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap
+}
+.scale figure{margin:0;display:grid;justify-items:center;gap:7px}
+.scale svg{display:block;color:var(--ink)}
+.scale figcaption{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-soft);font-variant-numeric:tabular-nums
+}
+
+/* ---------- lockup ---------- */
+.lockup{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.lockup svg{display:block;color:var(--ink);flex:none}
+.lockup .wm{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(15px,2.4vw,21px);letter-spacing:-.015em;line-height:1
+}
+.lockup .wm i{font-style:normal;color:var(--ink-soft);font-weight:400}
+
+/* ---------- verdict ---------- */
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px;margin-top:8px}
+.verdict h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 18px
+}
+.verdict p{max-width:58ch}
+.pick{
+  display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--plate);background:var(--redline);
+  padding:4px 10px;border-radius:2px;margin-bottom:14px
+}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap
+}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.next{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.next ol{margin:0;padding-left:20px;max-width:56ch}
+.next li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--redline);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Identity — Round 02</span>
+      <span>Brief: depth · structure · patience</span>
+    </div>
+    <h1>Three marks that<br>slow down<em>.</em></h1>
+    <p class="standfirst">The first round leaned. Lean reads as speed, and speed is the opposite of what you sell. These three drop the shear entirely and build the mark out of the only three things wisdom actually looks like: dimension, order, and accumulation.</p>
+  </header>
+
+  <div class="bar">
+    <label><input type="checkbox" id="constr"> Show construction</label>
+    <label><input type="checkbox" id="invert"> Knockout ground</label>
+    <span class="spacer"></span>
+    <button id="reset" type="button">Reset all</button>
+  </div>
+
+  <!-- ============ 01 ============ -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">01</span>
+      <h2>Tesseract</h2>
+      <span class="axis">Variable — dimension</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-tess" viewBox="-10 -10 120 120" fill="none" aria-label="Tesseract mark"></svg></div>
+        <div class="dims" id="dims-tess"></div>
+        <div class="knobs" id="knobs-tess"></div>
+        <div class="scale" id="scale-tess"></div>
+        <div class="lockup">
+          <svg id="lock-tess" viewBox="-10 -10 120 120" fill="none" width="38" height="38" aria-hidden="true"></svg>
+          <div class="wm">Hyper<i>Visuals</i></div>
+        </div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Hyper</b> — beyond, one dimension up<br><b>Visual</b> — the thing you can see of it</p>
+        <p class="lede">A hypercube is a cube's shadow from a dimension we can't stand in. It is the <strong>literal meaning of your name</strong>, drawn.</p>
+        <p>That's the whole argument. You are not called FastVisual. "Hyper" means the extra dimension — the thing that was always in the source but invisible until someone projected it down to where people live. That is precisely what a two-hour episode becomes in your hands.</p>
+        <p>It reads as intelligence without saying "brain," and as depth without saying "ocean." The eye has to resolve it — for a half second you see a flat diagram, then it pops into space and won't go back. That half second <em>is</em> patience, built into the mark.</p>
+        <p>The risk is real and I'll name it: tesseracts are a known move in tech branding. The defence is the perspective control below. Pushed off-centre, it stops being a symmetric diagram and becomes a specific view down a specific corridor — a drawing rather than a symbol.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">02</span>
+      <h2>Nine</h2>
+      <span class="axis">Variable — order</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-nine" viewBox="-10 -10 120 120" fill="none" aria-label="Nine mark"></svg></div>
+        <div class="dims" id="dims-nine"></div>
+        <div class="knobs" id="knobs-nine"></div>
+        <div class="scale" id="scale-nine"></div>
+        <div class="lockup">
+          <svg id="lock-nine" viewBox="-10 -10 120 120" fill="none" width="38" height="38" aria-hidden="true"></svg>
+          <div class="wm">Hyper<i>Visuals</i></div>
+        </div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Nine cells</b> — your HP-9 format<br><b>One parameter</b> — thin outline to solid</p>
+        <p class="lede">Your product is already a 3×3 grid of nine blocks. <strong>The logo should be the format.</strong></p>
+        <p>Every HyperPod you ship is a nine-cell grid. If the mark is that grid, then every deliverable is also a logo impression — thousands of them, in the exact context where you want to be recognised. Nobody else can use this shape without advertising you. That is the compounding asset, and you already own it.</p>
+        <p>The construction is one idea, not nine: each cell is a square with a <em>stroke</em>, and the only thing that changes is the stroke weight. When the weight reaches half the cell, the square is solid — the outline has closed itself. So the progression from empty to full is a single continuous number, and the grid resolves as your eye travels it.</p>
+        <p>That progression is the wisdom argument, and it is the honest one: understanding does not arrive, it densifies. Run it top-to-bottom for sedimentation, or on the diagonal for a five-step build across the whole field.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">03</span>
+      <h2>Strata</h2>
+      <span class="axis">Variable — accumulation</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-strata" viewBox="-10 -10 120 120" fill="none" aria-label="Strata mark"></svg></div>
+        <div class="dims" id="dims-strata"></div>
+        <div class="knobs" id="knobs-strata"></div>
+        <div class="scale" id="scale-strata"></div>
+        <div class="lockup">
+          <svg id="lock-strata" viewBox="-10 -10 120 120" fill="none" width="38" height="38" aria-hidden="true"></svg>
+          <div class="wm">Hyper<i>Visuals</i></div>
+        </div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Six layers</b> — thin at top, heavy at depth<br><b>One seam</b> — the cut that drifts as it descends</p>
+        <p class="lede">Sediment. The oldest, densest material is at the bottom, and <strong>the only way to it is down.</strong></p>
+        <p>Bands thicken as they descend, so the mark has a floor and a horizon — it has gravity, which none of the leaning options had. Read as rock strata it says deep time. Read as a stack of transcripts it says archive. Both are exactly the register you asked for.</p>
+        <p>The part that makes it yours is the seam. A vertical cut runs through every layer, and it <em>drifts</em> — each layer's gap sits slightly left of the one above. A straight cut would be a barcode. A drifting one is a core sample, a fault line, the path of something patient working its way down through material that keeps changing.</p>
+        <p>Straighten the drift to zero and you'll see the mark die instantly. That single offset is doing all the work, which is a good sign: it means the idea is load-bearing rather than decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ verdict ============ -->
+  <section class="verdict">
+    <span class="pick">Recommendation — 02 Nine</span>
+    <h2>Pick the one you're already printing</h2>
+    <p>Tesseract is the cleverest and Strata is the best <em>drawing</em>, but Nine is the only one that gets stronger every time you ship. The other two are marks you'd have to spend money teaching people. Nine is a mark your product distributes for free, nine cells at a time, on every single visual that leaves the studio.</p>
+    <p>The same logic as the slash from round one: a <strong>rule</strong> beats a <strong>picture</strong>, because a rule extends into everything you make later and a picture just sits there. Nine is a rule about how your grid densifies.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Strongest at</th><th>Weakest at</th><th>Use it as</th></tr></thead>
+        <tbody>
+          <tr><td>01 Tesseract</td><td>Meaning — it <em>is</em> the name</td><td>Ownability — crowded genre</td><td>The idea you keep if Nine tests as too plain</td></tr>
+          <tr><td>02 Nine</td><td>Compounding — your format is the mark</td><td>Needs the wordmark early on</td><td>The identity</td></tr>
+          <tr><td>03 Strata</td><td>Ownability — nobody has the drift</td><td>Says depth, not <em>visual</em></td><td>Pattern, endpapers, the motion signature</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="next">
+      <p style="margin:0 0 14px"><strong>Before you commit to one:</strong></p>
+      <ol>
+        <li>Trademark search on the mark alone, in classes covering media production and software.</li>
+        <li>Print all three at 12mm wide, in black on white, and look at them the next morning — not tonight.</li>
+        <li>Test naked at 512px with no wordmark, then at 16px as a favicon. Nine survives; Strata loses its top band; Tesseract needs its heaviest weight.</li>
+        <li>Whichever wins, lock its one number — cell gutter, inner scale, or seam drift — the way we locked the shear angle. That number becomes the system.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var SVGNS="http://www.w3.org/2000/svg";
+  var showConstr=false, knockout=false;
+
+  function el(name,attrs){
+    var n=document.createElementNS(SVGNS,name);
+    for(var k in attrs){ if(attrs[k]!==null&&attrs[k]!==undefined) n.setAttribute(k,attrs[k]); }
+    return n;
+  }
+  function r2(v){ return Math.round(v*10)/10; }
+
+  /* ---------------- state ---------------- */
+  var DEFAULTS={
+    tess:{weight:9, inner:44, persp:0, struts:4},
+    nine:{gutter:8, wmin:4, mode:"rows"},
+    strata:{ratio:1.38, gutter:5, seam:11, drift:4}
+  };
+  var S=JSON.parse(JSON.stringify(DEFAULTS));
+
+  /* ---------------- geometry builders ----------------
+     Each returns an array of SVG elements drawn in a 0..100 box.
+     `plain` = true strips construction lines (used for scale tests + lockups).
+  ------------------------------------------------------*/
+
+  function buildTesseract(p, plain){
+    var out=[], W=p.weight, Sz=p.inner, ox=p.persp;
+    var half=W/2;
+    var cx=50+ox, cy=50-ox*0.55;
+
+    if(showConstr && !plain){
+      out.push(el("line",{x1:50,y1:-6,x2:50,y2:106,class:"c-line"}));
+      out.push(el("line",{x1:-6,y1:50,x2:106,y2:50,class:"c-line"}));
+      out.push(el("line",{x1:0,y1:0,x2:100,y2:100,class:"c-line"}));
+      out.push(el("line",{x1:100,y1:0,x2:0,y2:100,class:"c-line"}));
+      out.push(el("circle",{cx:cx,cy:cy,r:1.6,class:"c-dot"}));
+    }
+
+    // outer + inner centre-line corners
+    var O=[[half,half],[100-half,half],[100-half,100-half],[half,100-half]];
+    var i0x=cx-Sz/2+half, i0y=cy-Sz/2+half, i1x=cx+Sz/2-half, i1y=cy+Sz/2-half;
+    var I=[[i0x,i0y],[i1x,i0y],[i1x,i1y],[i0x,i1y]];
+
+    var order = p.struts===4 ? [0,1,2,3] : [0,2];
+    for(var i=0;i<order.length;i++){
+      var a=O[order[i]], b=I[order[i]];
+      out.push(el("line",{x1:r2(a[0]),y1:r2(a[1]),x2:r2(b[0]),y2:r2(b[1]),
+        stroke:"currentColor","stroke-width":W,"stroke-linecap":"butt"}));
+    }
+    out.push(el("rect",{x:half,y:half,width:100-W,height:100-W,
+      stroke:"currentColor","stroke-width":W,"stroke-linejoin":"miter"}));
+    out.push(el("rect",{x:r2(i0x),y:r2(i0y),width:r2(Sz-W),height:r2(Sz-W),
+      stroke:"currentColor","stroke-width":W,"stroke-linejoin":"miter"}));
+    return out;
+  }
+
+  function buildNine(p, plain){
+    var out=[], g=p.gutter, cell=(100-2*g)/3, pos=[0,cell+g,2*(cell+g)];
+    var maxW=cell/2, wmin=Math.min(p.wmin, maxW-0.5);
+
+    if(showConstr && !plain){
+      for(var k=0;k<3;k++){
+        out.push(el("line",{x1:r2(pos[k]),y1:-6,x2:r2(pos[k]),y2:106,class:"c-line"}));
+        out.push(el("line",{x1:r2(pos[k]+cell),y1:-6,x2:r2(pos[k]+cell),y2:106,class:"c-line"}));
+        out.push(el("line",{x1:-6,y1:r2(pos[k]),x2:106,y2:r2(pos[k]),class:"c-line"}));
+        out.push(el("line",{x1:-6,y1:r2(pos[k]+cell),x2:106,y2:r2(pos[k]+cell),class:"c-line"}));
+      }
+    }
+
+    for(var r=0;r<3;r++){
+      for(var c=0;c<3;c++){
+        var t;
+        if(p.mode==="rows") t=r/2;
+        else if(p.mode==="cols") t=c/2;
+        else t=(r+c)/4;
+        var sw=wmin+t*(maxW-wmin);
+        var solid = Math.abs(sw-maxW)<0.01;
+        if(solid){
+          out.push(el("rect",{x:r2(pos[c]),y:r2(pos[r]),width:r2(cell),height:r2(cell),fill:"currentColor"}));
+        }else{
+          out.push(el("rect",{x:r2(pos[c]+sw/2),y:r2(pos[r]+sw/2),
+            width:r2(cell-sw),height:r2(cell-sw),
+            stroke:"currentColor","stroke-width":r2(sw),"stroke-linejoin":"miter"}));
+        }
+      }
+    }
+    return out;
+  }
+
+  function buildStrata(p, plain){
+    var out=[], n=6, g=p.gutter, ratio=p.ratio, sw=p.seam, drift=p.drift;
+    var total=100-(n-1)*g, sum=0, i;
+    for(i=0;i<n;i++) sum+=Math.pow(ratio,i);
+
+    // seam starts right-of-centre and drifts left as it descends
+    var sx0=64;
+    var y=0;
+    var lines=[];
+    for(i=0;i<n;i++){
+      var h=total*Math.pow(ratio,i)/sum;
+      var sx=Math.max(6, Math.min(100-sw-6, sx0-drift*i));
+      lines.push({y:y,h:h,sx:sx});
+      y+=h+g;
+    }
+
+    if(showConstr && !plain){
+      for(i=0;i<n;i++){
+        out.push(el("line",{x1:-6,y1:r2(lines[i].y),x2:106,y2:r2(lines[i].y),class:"c-line"}));
+      }
+      var pts=lines.map(function(L){ return r2(L.sx+sw/2)+","+r2(L.y+L.h/2); }).join(" ");
+      out.push(el("polyline",{points:pts,class:"c-path"}));
+      lines.forEach(function(L){
+        out.push(el("circle",{cx:r2(L.sx+sw/2),cy:r2(L.y+L.h/2),r:1.4,class:"c-dot"}));
+      });
+    }
+
+    lines.forEach(function(L){
+      out.push(el("rect",{x:0,y:r2(L.y),width:r2(L.sx),height:r2(L.h),fill:"currentColor"}));
+      out.push(el("rect",{x:r2(L.sx+sw),y:r2(L.y),width:r2(100-L.sx-sw),height:r2(L.h),fill:"currentColor"}));
+    });
+    return out;
+  }
+
+  var BUILDERS={tess:buildTesseract, nine:buildNine, strata:buildStrata};
+
+  /* ---------------- construction-line styling ---------------- */
+  function styleConstruction(svg){
+    svg.querySelectorAll(".c-line").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");
+      n.setAttribute("stroke-width","0.4");
+      n.setAttribute("stroke-dasharray","2.5 2.5");
+      n.setAttribute("opacity","0.75");
+    });
+    svg.querySelectorAll(".c-path").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");
+      n.setAttribute("stroke-width","0.7");
+      n.setAttribute("fill","none");
+    });
+    svg.querySelectorAll(".c-dot").forEach(function(n){
+      n.setAttribute("fill","var(--redline)");
+    });
+  }
+
+  /* ---------------- dimension read-outs ---------------- */
+  function dimText(key){
+    var p=S[key];
+    if(key==="tess") return ["stroke "+p.weight, "inner "+p.inner+"/100", "offset "+p.persp, "struts "+p.struts];
+    if(key==="nine"){
+      var cell=(100-2*p.gutter)/3;
+      return ["cell "+r2(cell), "gutter "+p.gutter, "stroke "+p.wmin+"→"+r2(cell/2), "axis "+p.mode];
+    }
+    return ["layers 6", "ratio "+p.ratio.toFixed(2), "gutter "+p.gutter, "seam "+p.seam, "drift "+p.drift+"/layer"];
+  }
+
+  /* ---------------- render ---------------- */
+  var SCALES=[20,28,44,72];
+
+  function render(key){
+    var build=BUILDERS[key];
+
+    // main plate
+    var svg=document.getElementById("svg-"+key);
+    svg.textContent="";
+    if(knockout){
+      svg.appendChild(el("rect",{x:-10,y:-10,width:120,height:120,fill:"var(--ink)"}));
+    }
+    var g=el("g",{});
+    if(knockout) g.setAttribute("color","var(--plate)");
+    build(S[key],false).forEach(function(n){ g.appendChild(n); });
+    svg.appendChild(g);
+    styleConstruction(svg);
+
+    // dimensions
+    var d=document.getElementById("dims-"+key);
+    d.textContent="";
+    dimText(key).forEach(function(t){
+      var s=document.createElement("span"); s.textContent=t; d.appendChild(s);
+    });
+
+    // scale strip
+    var strip=document.getElementById("scale-"+key);
+    strip.textContent="";
+    SCALES.forEach(function(px){
+      var fig=document.createElement("figure");
+      var s=el("svg",{viewBox:"-10 -10 120 120",width:px,height:px,fill:"none"});
+      build(S[key],true).forEach(function(n){ s.appendChild(n); });
+      var cap=document.createElement("figcaption"); cap.textContent=px+" px";
+      fig.appendChild(s); fig.appendChild(cap); strip.appendChild(fig);
+    });
+
+    // lockup
+    var lock=document.getElementById("lock-"+key);
+    lock.textContent="";
+    build(S[key],true).forEach(function(n){ lock.appendChild(n); });
+  }
+
+  function renderAll(){ ["tess","nine","strata"].forEach(render); }
+
+  /* ---------------- controls ---------------- */
+  var SPEC={
+    tess:[
+      {k:"weight",label:"Stroke weight",min:6,max:14,step:1},
+      {k:"inner",label:"Inner scale — depth",min:28,max:60,step:1},
+      {k:"persp",label:"Perspective offset",min:-14,max:14,step:1},
+      {k:"struts",label:"Struts",type:"seg",options:[[2,"Two"],[4,"Four"]]}
+    ],
+    nine:[
+      {k:"gutter",label:"Gutter",min:4,max:14,step:1},
+      {k:"wmin",label:"Lightest stroke",min:2,max:8,step:0.5},
+      {k:"mode",label:"Progression axis",type:"seg",options:[["rows","Down"],["cols","Across"],["diag","Diagonal"]]}
+    ],
+    strata:[
+      {k:"ratio",label:"Layer growth ratio",min:1.1,max:1.7,step:0.02},
+      {k:"gutter",label:"Gutter",min:2,max:9,step:0.5},
+      {k:"seam",label:"Seam width",min:5,max:18,step:1},
+      {k:"drift",label:"Seam drift per layer",min:0,max:8,step:0.5}
+    ]
+  };
+
+  function buildKnobs(key){
+    var host=document.getElementById("knobs-"+key);
+    host.textContent="";
+    SPEC[key].forEach(function(spec){
+      var wrap=document.createElement("div"); wrap.className="knob";
+      var name=document.createElement("span"); name.className="k-name"; name.textContent=spec.label;
+      var val=document.createElement("span"); val.className="k-val";
+      wrap.appendChild(name); wrap.appendChild(val);
+
+      if(spec.type==="seg"){
+        val.textContent="";
+        var seg=document.createElement("div"); seg.className="seg";
+        spec.options.forEach(function(opt){
+          var b=document.createElement("button"); b.type="button"; b.textContent=opt[1];
+          b.setAttribute("aria-pressed", String(S[key][spec.k]===opt[0]));
+          b.addEventListener("click",function(){
+            S[key][spec.k]=opt[0];
+            seg.querySelectorAll("button").forEach(function(o){ o.setAttribute("aria-pressed","false"); });
+            b.setAttribute("aria-pressed","true");
+            render(key);
+          });
+          seg.appendChild(b);
+        });
+        wrap.appendChild(seg);
+      }else{
+        var input=document.createElement("input");
+        input.type="range"; input.min=spec.min; input.max=spec.max; input.step=spec.step;
+        input.value=S[key][spec.k];
+        input.setAttribute("aria-label",spec.label);
+        val.textContent=Number(S[key][spec.k]).toFixed(spec.step<1?2:0);
+        input.addEventListener("input",function(){
+          S[key][spec.k]=parseFloat(input.value);
+          val.textContent=Number(input.value).toFixed(spec.step<1?2:0);
+          render(key);
+        });
+        wrap.appendChild(input);
+      }
+      host.appendChild(wrap);
+    });
+  }
+
+  document.getElementById("constr").addEventListener("change",function(e){
+    showConstr=e.target.checked; renderAll();
+  });
+  document.getElementById("invert").addEventListener("change",function(e){
+    knockout=e.target.checked; renderAll();
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    S=JSON.parse(JSON.stringify(DEFAULTS));
+    ["tess","nine","strata"].forEach(buildKnobs);
+    renderAll();
+  });
+
+  ["tess","nine","strata"].forEach(buildKnobs);
+  renderAll();
+})();
+</script>
