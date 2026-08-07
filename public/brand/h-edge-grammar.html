@@ -1,0 +1,664 @@
+<title>HyperVisuals — The H, Properly Cut</title>
+<style>
+:root{
+  --ink:#14171B; --ink-soft:#4C545C;
+  --paper:#E4E6E2; --plate:#EFF0ED;
+  --rule:#C6CAC4; --rule-soft:#D6D9D3;
+  --redline:#A93A29; --redline-soft:#A93A2914;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#101316;--plate:#171B1F;
+    --rule:#2C3238;--rule-soft:#232930;--redline:#E06B54;--redline-soft:#E06B5414;
+    --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8C948C;--paper:#101316;--plate:#171B1F;
+  --rule:#2C3238;--rule-soft:#232930;--redline:#E06B54;--redline-soft:#E06B5414;
+  --shadow:0 1px 0 #FFFFFF08, 0 12px 28px -22px #000;}
+:root[data-theme="light"]{--ink:#14171B;--ink-soft:#4C545C;--paper:#E4E6E2;--plate:#EFF0ED;
+  --rule:#C6CAC4;--rule-soft:#D6D9D3;--redline:#A93A29;--redline-soft:#A93A2914;
+  --shadow:0 1px 0 #FFFFFF80, 0 12px 28px -22px #14171B99;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(18px,4vw,40px) 96px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:34px}
+.slug{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--redline);display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:26px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,58px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:60ch;margin:0;font-size:clamp(17px,2.1vw,20px);line-height:1.55}
+
+.callout{border-left:2px solid var(--redline);background:var(--redline-soft);
+  padding:18px 22px;margin:0 0 44px;max-width:66ch}
+.callout p{margin:0 0 12px}.callout p:last-child{margin:0}
+.callout strong{font-weight:600}
+
+/* ---------- hero ---------- */
+.hero{background:var(--ink);border-radius:3px;padding:clamp(24px,5vw,52px);
+  margin-bottom:clamp(48px,8vw,80px);display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,5vw,52px);align-items:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.hero-mark svg{display:block;width:100%;height:auto;color:var(--paper)}
+.hero-side .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--redline);margin:0 0 14px}
+.hero-side h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(22px,3.6vw,34px);letter-spacing:-.025em;line-height:1.02;
+  margin:0 0 16px;color:var(--paper)}
+.hero-side p{margin:0 0 14px;color:var(--paper);opacity:.82;font-size:16px;max-width:40ch}
+.hero-side p:last-child{margin:0}
+.hero-side strong{opacity:1;font-weight:600}
+
+/* ---------- zoom ---------- */
+.zoomwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px;margin-top:22px}
+.zoomwrap figure{margin:0;display:grid;gap:8px;justify-items:center}
+.zoomwrap .z{background:var(--plate);border:1px solid var(--rule);border-radius:2px;
+  width:100%;aspect-ratio:1;padding:6px}
+.zoomwrap svg{display:block;width:100%;height:100%;color:var(--ink)}
+.zoomwrap figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);text-align:center}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:12px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:52px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.bar label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;color:var(--ink-soft)}
+.bar input[type=checkbox]{accent-color:var(--redline);width:14px;height:14px;cursor:pointer}
+.bar button{font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:5px 12px;border-radius:2px;
+  transition:border-color .15s,color .15s}
+.bar button:hover{border-color:var(--redline);color:var(--redline)}
+.bar .spacer{flex:1}
+
+.plate{margin-bottom:clamp(56px,9vw,100px)}
+.plate-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px}
+.idx{font-family:var(--mono);font-size:12px;color:var(--redline);letter-spacing:.1em}
+.plate-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.2vw,30px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.05fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+.field{background:var(--plate);border:1px solid var(--rule);border-radius:2px;
+  padding:clamp(20px,4vw,38px);box-shadow:var(--shadow)}
+.field svg{display:block;width:100%;height:auto;color:var(--ink)}
+.dims{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 18px;font-variant-numeric:tabular-nums}
+
+.rationale > p{margin:0 0 15px;max-width:52ch}
+.rationale > p:last-of-type{margin-bottom:0}
+.lede{font-size:19px;line-height:1.5}.lede strong{font-weight:600}
+.reads{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:2px solid var(--redline);padding:2px 0 2px 14px;
+  margin:0 0 20px;line-height:1.9}
+.reads b{color:var(--ink);font-weight:400}
+
+.knobs{margin-top:24px;display:grid;gap:14px}
+.knob{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+.knob .k-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.knob .k-val{font-family:var(--mono);font-size:10.5px;color:var(--redline);font-variant-numeric:tabular-nums}
+.knob input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--redline);height:18px;cursor:pointer}
+.seg{grid-column:1/-1;display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{flex:1;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  padding:7px 3px;background:none;border:none;border-right:1px solid var(--rule);
+  color:var(--ink-soft);cursor:pointer;transition:background .15s,color .15s}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed="true"]{background:var(--redline);color:var(--plate)}
+
+.scale{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
+.scale figure{margin:0;display:grid;justify-items:center;gap:7px}
+.scale svg{display:block;color:var(--ink)}
+.scale figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+.panel{border-top:1.5px solid var(--ink);padding-top:26px;margin-bottom:clamp(48px,8vw,84px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 14px}
+.panel > p{max-width:60ch;margin:0 0 26px}
+.chooser{display:flex;flex-wrap:wrap;border:1px solid var(--rule);border-radius:2px;
+  overflow:hidden;margin-bottom:30px;max-width:460px}
+.chooser button{flex:1;min-width:104px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 6px;background:none;border:none;
+  border-right:1px solid var(--rule);color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.chooser button:last-child{border-right:none}
+.chooser button[aria-pressed="true"]{background:var(--redline);color:var(--plate)}
+
+.family{border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px);
+  padding:clamp(16px,3vw,24px) clamp(16px,3vw,26px);
+  background:var(--plate);border-bottom:1px solid var(--rule)}
+.lock:last-child{border-bottom:none}
+.lock svg{display:block;color:var(--ink);flex:none}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,3vw,27px);letter-spacing:-.02em;line-height:1}
+.lock .wm .sl{color:var(--redline);font-weight:400;padding:0 .06em}
+.lock .wm .sub{color:var(--ink-soft)}
+.lock .desc{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:1.7}
+@media (max-width:620px){.lock .desc{display:none}}
+
+.tiles{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end}
+.tiles figure{margin:0;display:grid;justify-items:center;gap:9px}
+.tiles .tile{background:var(--ink);border-radius:14%;display:flex;
+  align-items:center;justify-content:center;overflow:hidden}
+.tiles svg{display:block;color:var(--paper)}
+.tiles figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:26px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,3.4vw,30px);letter-spacing:-.02em;margin:0 0 18px}
+.verdict p{max-width:58ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--plate);background:var(--redline);
+  padding:4px 10px;border-radius:2px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;margin:24px 0 8px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.next{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.next ol{margin:0;padding-left:20px;max-width:56ch}
+.next li{margin-bottom:8px}
+:focus-visible{outline:2px solid var(--redline);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">
+      <span>The HyperVisuals Media Co.</span>
+      <span>Identity — Round 05</span>
+      <span>Edge grammar</span>
+    </div>
+    <h1>Cut, not<br>drafted<em>.</em></h1>
+    <p class="standfirst">You were right about the edges. Everything I'd drawn met at 90° — that's a diagram, not a monogram. What separates a real mark from a rectangle arrangement is a rule about how every edge terminates. Here are three, and one of them is the answer.</p>
+  </header>
+
+  <div class="callout">
+    <p><strong>The thing that was missing.</strong></p>
+    <p>A monogram isn't a letter shape — it's a letter shape plus a <em>terminal grammar</em>: a single, ruthlessly consistent rule for how every stroke ends. That rule is what your eye registers as "designed," and it's what carries across a whole system when you extend to a typeface, a sub-brand, a pattern.</p>
+    <p>Without it, you get what I gave you: correct proportions and dead edges.</p>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-mark"><svg id="hero" fill="none" aria-label="Nib H — the recommended mark"></svg></div>
+    <div class="hero-side">
+      <p class="eyebrow">The recommendation — Nib H</p>
+      <h2>One angle, cut through everything</h2>
+      <p>Every terminal in this mark is cut at <strong>the same angle</strong>, as though one chisel passed through the whole letter without ever changing its grip.</p>
+      <p>That's not a style. It's the oldest rule in Western letterforms — Roman inscriptional carving, then the broad-nib pen, then every serif face descended from them. The horizontal is thinner than the verticals for the same reason: a blade held at an angle simply cuts less material going sideways.</p>
+      <p>Which gives you the thing you actually asked for. <strong>Legacy is not a look you apply — it's a construction rule that has already survived two thousand years.</strong> Run it through hard geometry and no curves and it reads as new.</p>
+    </div>
+  </div>
+
+  <div class="bar">
+    <label><input type="checkbox" id="constr"> Show construction</label>
+    <label><input type="checkbox" id="invert"> Knockout ground</label>
+    <span class="spacer"></span>
+    <button id="reset" type="button">Reset all</button>
+  </div>
+
+  <!-- 01 NIB -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">01</span><h2>Nib</h2>
+      <span class="axis">Rule — one constant cutting angle</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-nib" fill="none" aria-label="Nib H"></svg></div>
+        <div class="dims" id="dims-nib"></div>
+        <div class="zoomwrap" id="zoom-nib"></div>
+        <div class="knobs" id="knobs-nib"></div>
+        <div class="scale" id="scale-nib"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Every terminal</b> — cut at one angle<br><b>The crossbar</b> — thinner, because the blade says so</p>
+        <p class="lede">Change the angle and <strong>the crossbar's weight changes with it</strong>, because both come from the same number.</p>
+        <p>That's the test of a real grammar rather than a decoration: the contrast between thick and thin isn't a taste decision you defend in a meeting, it's a consequence. Drag the angle and watch the horizontal thin out on its own.</p>
+        <p>The contrast slider is the one concession to legibility — pure blade geometry makes the crossbar too fine to survive a favicon, so it blends back toward even weight. Keep it low. Everything interesting about the mark lives in the first quarter of that slider.</p>
+        <p>Look at the corner zooms above. That's what an edge is supposed to do — arrive somewhere, at an angle, on purpose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 CHAMFER -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">02</span><h2>Chamfer</h2>
+      <span class="axis">Rule — corners are facets</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-cham" fill="none" aria-label="Chamfer H"></svg></div>
+        <div class="dims" id="dims-cham"></div>
+        <div class="zoomwrap" id="zoom-cham"></div>
+        <div class="knobs" id="knobs-cham"></div>
+        <div class="scale" id="scale-cham"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Corners removed</b> — at 45°, by rule<br><b>Which corners</b> — is the whole design decision</p>
+        <p class="lede">This is the language of the sheet you sent me, <strong>built as a system instead of a drawing.</strong></p>
+        <p>Chamfering everything is the obvious move and the weakest one — it reads as a bevel filter. The interesting settings are the selective ones. <em>Diagonal</em> cuts only the top-left and bottom-right, which puts rotation into a mark that never leans. <em>Counters</em> cuts only the four inside corners, so the letter stays square outside and gets sharp where the eye actually lingers.</p>
+        <p>Faceting is also the most literal expression of intelligence-as-cut-material: a rough stone and a cut stone differ only in edges, and only one of them is worth something.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 RADIUS -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="idx">03</span><h2>Radius</h2>
+      <span class="axis">Rule — outer soft, inner sharp</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="field"><svg id="svg-rad" fill="none" aria-label="Radius H"></svg></div>
+        <div class="dims" id="dims-rad"></div>
+        <div class="zoomwrap" id="zoom-rad"></div>
+        <div class="knobs" id="knobs-rad"></div>
+        <div class="scale" id="scale-rad"></div>
+      </div>
+      <div class="rationale">
+        <p class="reads"><b>Outer corners</b> — generously rounded<br><b>Inner corners</b> — left sharp, or nearly</p>
+        <p class="lede">Rounding everything makes a mark friendly. Rounding <strong>only the outside</strong> makes it feel manufactured.</p>
+        <p>This is the industrial-design move — the one that reads as a machined part or a well-made object. Soft where a hand would touch it, sharp where the material was cut. The two radii should never match; the moment they do, it collapses into an app icon.</p>
+        <p>I'm including it because it's the most immediately likeable of the three and it will test best with people who aren't designers. It's also the least ownable — warmth is the most crowded space in modern identity, and this is the direction most likely to look like something else in two years.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- comparison -->
+  <section class="panel">
+    <h2>The three edges, side by side</h2>
+    <p>Same proportions, same weight, same letter. The only variable is what happens in the last two percent of every stroke — which is the entire difference between a mark you'd register and a mark you'd redraw.</p>
+    <div class="tiles" id="compare"></div>
+  </section>
+
+  <!-- system -->
+  <section class="panel">
+    <h2>Carried across the brands</h2>
+    <p>Pick an edge grammar and watch it hold. The H never changes between products — only the word after the slash. And because the grammar is a rule rather than a shape, it extends to the wordmark, the sub-brand type, and eventually a full display face.</p>
+    <div class="chooser" id="chooser" role="group" aria-label="Choose the edge grammar"></div>
+    <div class="family" id="family"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Where it actually lives</h2>
+    <p>Knocked out of a filled tile, at the sizes people meet you: podcast art, avatar, list row, favicon. Watch the edge survive — or not. This is where Radius flatters itself and Nib earns its keep.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Recommendation — 01 Nib</span>
+    <h2>The rule that outlives the trend</h2>
+    <p>Chamfer is the most <em>now</em>, and that's precisely the problem — the sheet you sent me is a genre currently at peak supply, and marks built to look current are the ones that date hardest. Radius is the safest and the least yours.</p>
+    <p>Nib is the only one of the three whose logic predates the trend cycle entirely. A constant cutting angle produced the Roman capital, the humanist page, and every serif you've ever read. <strong>Building on it isn't nostalgia — it's picking the one rule that's already proven it survives.</strong> Cut with flat planes and no curves, it doesn't look historical at all; it looks like something made now by someone who knew what they were doing.</p>
+    <p>And it gives you the thing none of the others do: an angle you can name. Lock it, and it governs the mark, the wordmark's terminals, the sub-brand type, the pattern, the motion. One number the entire identity inherits.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Grammar</th><th>Reads as</th><th>Ages</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>01 Nib</td><td>Cut by a hand that knew the angle</td><td>Already has, for centuries</td><td>Take it</td></tr>
+          <tr><td>02 Chamfer</td><td>Faceted, engineered, current</td><td>Peaks with the trend</td><td>Use selectively, or not at all</td></tr>
+          <tr><td>03 Radius</td><td>Manufactured, likeable</td><td>Safe, forgettable</td><td>Fallback if Nib tests cold</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="next">
+      <p style="margin:0 0 14px"><strong>What I'd do next:</strong></p>
+      <ol>
+        <li>Trademark search before anything else — single letters are the most heavily registered class there is.</li>
+        <li>Lock the nib angle. Then draw HYPER in the same grammar: every terminal in the wordmark cut at that identical angle. That's when it stops being a logo and becomes an identity.</li>
+        <li>Draw the small-size variant — angle held, contrast raised, so the crossbar survives 16px. Ship it as an optical size and switch below ~24px.</li>
+        <li>Optical correction pass at final scale: the angled terminals will need the piers a hair narrower than the maths says, because slanted cuts read heavier than flat ones.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var showConstr=false, knockout=false, active="nib";
+
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
+  function r2(v){return Math.round(v*100)/100;}
+  function rad(d){return d*Math.PI/180;}
+
+  var DEFAULTS={
+    nib:{angle:28,pier:24,contrast:.22,kerf:4,cy:50},
+    cham:{size:9,pier:26,bar:20,mode:"diag"},
+    rad:{outer:14,inner:3,pier:26,bar:20}
+  };
+  var S=JSON.parse(JSON.stringify(DEFAULTS));
+
+  /* ---------- H outline as a 12-point polygon ---------- */
+  function hPoly(w,bh,cy){
+    var a=cy-bh/2, b=cy+bh/2;
+    return [[0,0],[w,0],[w,a],[100-w,a],[100-w,0],[100,0],
+            [100,100],[100-w,100],[100-w,b],[w,b],[w,100],[0,100]];
+  }
+  function crossAt(pts,i){
+    var A=pts[(i-1+pts.length)%pts.length],P=pts[i],B=pts[(i+1)%pts.length];
+    return (P[0]-A[0])*(B[1]-P[1])-(P[1]-A[1])*(B[0]-P[0]);
+  }
+  function unit(from,to){
+    var dx=to[0]-from[0],dy=to[1]-from[1],L=Math.hypot(dx,dy)||1;
+    return [dx/L,dy/L,L];
+  }
+
+  /* chamfer selected vertices -> polygon points */
+  function chamfer(pts,sel,c){
+    var out=[];
+    for(var i=0;i<pts.length;i++){
+      var P=pts[i];
+      if(sel.indexOf(i)<0 || c<=0){ out.push(P); continue; }
+      var A=pts[(i-1+pts.length)%pts.length], B=pts[(i+1)%pts.length];
+      var uA=unit(P,A), uB=unit(P,B);
+      var cc=Math.min(c,uA[2]*0.46,uB[2]*0.46);
+      out.push([P[0]+uA[0]*cc,P[1]+uA[1]*cc]);
+      out.push([P[0]+uB[0]*cc,P[1]+uB[1]*cc]);
+    }
+    return out;
+  }
+
+  /* round vertices -> path string; ro for convex, ri for reflex */
+  function roundedPath(pts,ro,ri){
+    var d="",first=null;
+    for(var i=0;i<pts.length;i++){
+      var P=pts[i],A=pts[(i-1+pts.length)%pts.length],B=pts[(i+1)%pts.length];
+      var convex=crossAt(pts,i)>0;
+      var r=convex?ro:ri;
+      var uA=unit(P,A),uB=unit(P,B);
+      var rr=Math.min(r,uA[2]*0.48,uB[2]*0.48);
+      if(rr<=0.15){
+        if(!first){first=P;d="M"+r2(P[0])+" "+r2(P[1]);}
+        else d+=" L"+r2(P[0])+" "+r2(P[1]);
+        continue;
+      }
+      var t1=[P[0]+uA[0]*rr,P[1]+uA[1]*rr];
+      var t2=[P[0]+uB[0]*rr,P[1]+uB[1]*rr];
+      if(!first){first=t1;d="M"+r2(t1[0])+" "+r2(t1[1]);}
+      else d+=" L"+r2(t1[0])+" "+r2(t1[1]);
+      d+=" A"+r2(rr)+" "+r2(rr)+" 0 0 "+(convex?1:0)+" "+r2(t2[0])+" "+r2(t2[1]);
+    }
+    return d+" Z";
+  }
+  function polyPath(pts){
+    return "M"+pts.map(function(p){return r2(p[0])+" "+r2(p[1]);}).join(" L")+" Z";
+  }
+
+  /* ---------- 01 NIB ---------- */
+  function nibParts(p){
+    var w=p.pier, th=rad(p.angle), t=w*Math.tan(th);
+    var bhPure=w*Math.tan(th);
+    var bh=bhPure+p.contrast*(w-bhPure);
+    var run=bh*Math.tan(th);
+    var cy=p.cy, k=p.kerf;
+    var by0=cy-bh/2, by1=cy+bh/2;
+    var xa=w+k, xb=100-w-k-run;
+    return {
+      left:[[0,t],[w,0],[w,100-t],[0,100]],
+      right:[[100-w,t],[100,0],[100,100-t],[100-w,100]],
+      bar: xb>xa+1 ? [[xa+run,by0],[xb+run,by0],[xb,by1],[xa,by1]] : null,
+      t:t, bh:bh, run:run
+    };
+  }
+  function buildNib(p,plain){
+    var out=[],N=nibParts(p);
+    if(showConstr&&!plain){
+      out.push(el("rect",{x:0,y:0,width:100,height:100,class:"c-line"}));
+      var L=60;
+      out.push(el("line",{x1:6,y1:r2(50+L*Math.sin(rad(p.angle))/2),
+        x2:r2(6+L*Math.cos(rad(p.angle))),y2:r2(50-L*Math.sin(rad(p.angle))/2),class:"c-path"}));
+    }
+    out.push(el("path",{d:polyPath(N.left),fill:"currentColor"}));
+    out.push(el("path",{d:polyPath(N.right),fill:"currentColor"}));
+    if(N.bar) out.push(el("path",{d:polyPath(N.bar),fill:"currentColor"}));
+    return out;
+  }
+
+  /* ---------- 02 CHAMFER ---------- */
+  var CH_MODES={
+    all:[0,1,4,5,6,7,10,11],
+    diag:[0,6],
+    outer:[0,5,6,11],
+    counter:[2,3,8,9]
+  };
+  function buildCham(p,plain){
+    var out=[],pts=hPoly(p.pier,p.bar,50);
+    var sel=CH_MODES[p.mode]||CH_MODES.all;
+    if(showConstr&&!plain){
+      out.push(el("path",{d:polyPath(pts),class:"c-line"}));
+    }
+    out.push(el("path",{d:polyPath(chamfer(pts,sel,p.size)),fill:"currentColor"}));
+    return out;
+  }
+
+  /* ---------- 03 RADIUS ---------- */
+  function buildRad(p,plain){
+    var out=[],pts=hPoly(p.pier,p.bar,50);
+    if(showConstr&&!plain) out.push(el("path",{d:polyPath(pts),class:"c-line"}));
+    out.push(el("path",{d:roundedPath(pts,p.outer,p.inner),fill:"currentColor"}));
+    return out;
+  }
+
+  var B={nib:buildNib,cham:buildCham,rad:buildRad};
+  var KEYS=["nib","cham","rad"];
+  var NAMES={nib:"Nib",cham:"Chamfer",rad:"Radius"};
+  var VB="-6 -6 112 112";
+
+  function styleC(svg){
+    svg.querySelectorAll(".c-line").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");n.setAttribute("stroke-width","0.5");
+      n.setAttribute("stroke-dasharray","2.5 2.5");n.setAttribute("fill","none");n.setAttribute("opacity",".8");
+    });
+    svg.querySelectorAll(".c-path").forEach(function(n){
+      n.setAttribute("stroke","var(--redline)");n.setAttribute("stroke-width","1");n.setAttribute("fill","none");
+    });
+  }
+
+  function dims(k){
+    var p=S[k];
+    if(k==="nib"){var N=nibParts(p);
+      return ["angle "+p.angle+"°","pier "+p.pier,"crossbar "+r2(N.bh),
+              "contrast "+r2(p.contrast),"kerf "+p.kerf];}
+    if(k==="cham") return ["chamfer "+p.size,"mode "+p.mode,"pier "+p.pier,"bar "+p.bar];
+    return ["outer r "+p.outer,"inner r "+p.inner,"ratio "+r2(p.outer/Math.max(p.inner,.1))+":1","pier "+p.pier];
+  }
+
+  function markSvg(k,px,color){
+    var s=el("svg",{viewBox:VB,width:px,height:px,fill:"none"});
+    B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+    if(color) s.setAttribute("color",color);
+    return s;
+  }
+
+  /* corner zooms — where the edge actually is */
+  var ZOOMS=[
+    {vb:"-4 -4 34 34", cap:"Top-left terminal"},
+    {vb:"70 -4 34 34", cap:"Top-right terminal"},
+    {vb:"14 34 40 40", cap:"Crossbar join"}
+  ];
+  function renderZoom(k){
+    var host=document.getElementById("zoom-"+k); host.textContent="";
+    ZOOMS.forEach(function(z){
+      var fig=document.createElement("figure");
+      var box=document.createElement("div"); box.className="z";
+      var s=el("svg",{viewBox:z.vb,fill:"none",preserveAspectRatio:"xMidYMid meet"});
+      B[k](S[k],true).forEach(function(n){s.appendChild(n);});
+      box.appendChild(s);
+      var c=document.createElement("figcaption"); c.textContent=z.cap;
+      fig.appendChild(box); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  var SCALES=[20,28,44,72];
+  function render(k){
+    var svg=document.getElementById("svg-"+k);
+    svg.textContent=""; svg.setAttribute("viewBox",VB);
+    if(knockout) svg.appendChild(el("rect",{x:-6,y:-6,width:112,height:112,fill:"var(--ink)"}));
+    var g=el("g",{}); if(knockout) g.setAttribute("color","var(--plate)");
+    B[k](S[k],false).forEach(function(n){g.appendChild(n);});
+    svg.appendChild(g); styleC(svg);
+
+    var d=document.getElementById("dims-"+k); d.textContent="";
+    dims(k).forEach(function(t){var s=document.createElement("span");s.textContent=t;d.appendChild(s);});
+
+    renderZoom(k);
+
+    var strip=document.getElementById("scale-"+k); strip.textContent="";
+    SCALES.forEach(function(px){
+      var fig=document.createElement("figure");
+      fig.appendChild(markSvg(k,px));
+      var c=document.createElement("figcaption"); c.textContent=px+" px";
+      fig.appendChild(c); strip.appendChild(fig);
+    });
+
+    if(k==="nib"){
+      var hero=document.getElementById("hero");
+      hero.textContent=""; hero.setAttribute("viewBox",VB);
+      buildNib(S.nib,true).forEach(function(n){hero.appendChild(n);});
+    }
+    renderCompare();
+    if(k===active){renderFamily();renderTiles();}
+  }
+
+  function renderCompare(){
+    var host=document.getElementById("compare"); host.textContent="";
+    KEYS.forEach(function(k){
+      var fig=document.createElement("figure");
+      fig.appendChild(markSvg(k,124));
+      var c=document.createElement("figcaption"); c.textContent=NAMES[k];
+      fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  var BRANDS=[
+    {sub:"Pod",note:"Podcast visuals<br>HP-3 → HP-10"},
+    {sub:"Library",note:"Archive<br>Searchable back catalogue"},
+    {sub:"Brand",note:"Identity work<br>Client-facing"}
+  ];
+  function renderFamily(){
+    var host=document.getElementById("family"); host.textContent="";
+    BRANDS.forEach(function(b){
+      var row=document.createElement("div"); row.className="lock";
+      row.appendChild(markSvg(active,46));
+      var wm=document.createElement("div"); wm.className="wm";
+      wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b.sub+'</span>';
+      row.appendChild(wm);
+      var d=document.createElement("div"); d.className="desc"; d.innerHTML=b.note;
+      row.appendChild(d); host.appendChild(row);
+    });
+  }
+
+  var TILES=[{px:96,cap:"96 — podcast tile"},{px:56,cap:"56 — avatar"},
+             {px:32,cap:"32 — list row"},{px:18,cap:"18 — favicon"}];
+  function renderTiles(){
+    var host=document.getElementById("tiles"); host.textContent="";
+    TILES.forEach(function(t){
+      var fig=document.createElement("figure");
+      var tile=document.createElement("div"); tile.className="tile";
+      tile.style.width=t.px+"px"; tile.style.height=t.px+"px";
+      tile.appendChild(markSvg(active,Math.round(t.px*0.54),"var(--paper)"));
+      var c=document.createElement("figcaption"); c.textContent=t.cap;
+      fig.appendChild(tile); fig.appendChild(c); host.appendChild(fig);
+    });
+  }
+
+  function buildChooser(){
+    var host=document.getElementById("chooser"); host.textContent="";
+    KEYS.forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.textContent=NAMES[k];
+      b.setAttribute("aria-pressed",String(k===active));
+      b.addEventListener("click",function(){
+        active=k;
+        host.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        renderFamily(); renderTiles();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  var SPEC={
+    nib:[{k:"angle",label:"Nib angle — the constant",min:14,max:46,step:1},
+         {k:"contrast",label:"Contrast relief (keep low)",min:0,max:1,step:.02},
+         {k:"pier",label:"Pier width",min:16,max:32,step:1},
+         {k:"kerf",label:"Kerf at the join",min:0,max:9,step:.5},
+         {k:"cy",label:"Crossbar position",min:40,max:60,step:1}],
+    cham:[{k:"mode",label:"Which corners",type:"seg",
+            options:[["diag","Diagonal"],["outer","Outer"],["counter","Counters"],["all","All"]]},
+         {k:"size",label:"Chamfer size",min:0,max:18,step:.5},
+         {k:"pier",label:"Pier width",min:18,max:34,step:1},
+         {k:"bar",label:"Crossbar height",min:12,max:30,step:1}],
+    rad:[{k:"outer",label:"Outer radius",min:0,max:26,step:.5},
+         {k:"inner",label:"Inner radius",min:0,max:14,step:.5},
+         {k:"pier",label:"Pier width",min:18,max:34,step:1},
+         {k:"bar",label:"Crossbar height",min:12,max:30,step:1}]
+  };
+  function knobs(k){
+    var host=document.getElementById("knobs-"+k); host.textContent="";
+    SPEC[k].forEach(function(sp){
+      var wrap=document.createElement("div"); wrap.className="knob";
+      var nm=document.createElement("span"); nm.className="k-name"; nm.textContent=sp.label;
+      var vl=document.createElement("span"); vl.className="k-val";
+      wrap.appendChild(nm); wrap.appendChild(vl);
+      if(sp.type==="seg"){
+        var seg=document.createElement("div"); seg.className="seg";
+        sp.options.forEach(function(o){
+          var b=document.createElement("button"); b.type="button"; b.textContent=o[1];
+          b.setAttribute("aria-pressed",String(S[k][sp.k]===o[0]));
+          b.addEventListener("click",function(){
+            S[k][sp.k]=o[0];
+            seg.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+            b.setAttribute("aria-pressed","true"); render(k);
+          });
+          seg.appendChild(b);
+        });
+        wrap.appendChild(seg);
+      }else{
+        var inp=document.createElement("input");
+        inp.type="range"; inp.min=sp.min; inp.max=sp.max; inp.step=sp.step;
+        inp.value=S[k][sp.k]; inp.setAttribute("aria-label",sp.label);
+        vl.textContent=Number(S[k][sp.k]).toFixed(sp.step<1?2:0);
+        inp.addEventListener("input",function(){
+          S[k][sp.k]=parseFloat(inp.value);
+          vl.textContent=Number(inp.value).toFixed(sp.step<1?2:0);
+          render(k);
+        });
+        wrap.appendChild(inp);
+      }
+      host.appendChild(wrap);
+    });
+  }
+
+  function renderAll(){KEYS.forEach(render);}
+  document.getElementById("constr").addEventListener("change",function(e){showConstr=e.target.checked;renderAll();});
+  document.getElementById("invert").addEventListener("change",function(e){knockout=e.target.checked;renderAll();});
+  document.getElementById("reset").addEventListener("click",function(){
+    S=JSON.parse(JSON.stringify(DEFAULTS)); KEYS.forEach(knobs); renderAll();
+  });
+
+  KEYS.forEach(knobs); buildChooser(); renderAll();
+})();
+</script>

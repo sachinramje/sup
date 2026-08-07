@@ -147,3 +147,52 @@ extended, doing dividers, underlines and lower-thirds. One mark, one rule.
    size; switch to it below roughly 24px.
 4. Derive clear space from pier width and wordmark cap height from crossbar height, so
    every lockup comes from the mark rather than being eyeballed.
+
+---
+
+# Round 05 — edge grammar
+
+**Correction:** every earlier mark met at 90°. That reads as drafted, not cut. A monogram
+is a letter shape *plus a terminal grammar* — one consistent rule for how every stroke
+ends. Without it you get correct proportions and dead edges.
+
+| File | Grammar | Rule | Ages |
+| --- | --- | --- | --- |
+| `hv-n1-nib.svg` | Nib | Every terminal cut at one constant angle | Already has, for centuries. **Recommended.** |
+| `hv-n2-chamfer.svg` | Chamfer | Selected corners removed at 45° | Peaks with the trend |
+| `hv-n3-radius.svg` | Radius | Outer corners soft, inner corners sharp | Safe, forgettable |
+
+`h-edge-grammar.html` presents all three parametrically with corner-detail zooms
+(top-left terminal, top-right terminal, crossbar join) so the edge itself is inspectable.
+
+## Constants at the defaults exported here
+
+- **Nib** — angle 28°, pier 24, contrast relief 0.22, kerf 4. Crossbar height is
+  *derived*, not chosen: a blade held at 28° removes less material travelling sideways,
+  so the horizontal comes out at 15.2 against the pier's 24. Change the angle and the
+  contrast changes with it. The contrast slider blends back toward even weight purely
+  for small-size legibility — keep it low.
+- **Chamfer** — 9 units, diagonal mode (top-left and bottom-right only). Chamfering
+  everything reads as a bevel filter; the selective modes are the design. Diagonal puts
+  rotation into a mark that never leans; Counters keeps the outside square and sharpens
+  only where the eye lingers.
+- **Radius** — outer 14, inner 3, roughly 4.7:1. The two radii must never match; equal
+  radii collapse it into an app icon.
+
+## Recommendation
+
+**Nib.** It is the only grammar whose logic predates the trend cycle — a constant cutting
+angle produced the Roman capital and every serif descended from it. Cut with flat planes
+and no curves it does not read as historical; it reads as made by someone who knew what
+they were doing. It also yields a single number the whole identity can inherit.
+
+## Next
+
+1. Trademark search before anything else — single letters are the most heavily
+   registered class there is.
+2. Lock the nib angle, then draw HYPER in the same grammar: every terminal in the
+   wordmark cut at that identical angle.
+3. Ship a small-size optical variant — angle held, contrast raised so the crossbar
+   survives 16px — and switch below ~24px.
+4. Optical correction at final scale: slanted terminals read heavier than flat ones, so
+   the piers want to be a hair narrower than the maths says.
