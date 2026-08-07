@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.52 100" fill="currentColor">
+    <rect x="0" y="0" width="20" height="100" transform="translate(0,100) skewX(-12) translate(0,-100)"/>
+    <rect x="30" y="0" width="20" height="100" transform="translate(0,100) skewX(-18) translate(0,-100)"/>
+    <rect x="60" y="0" width="20" height="100" transform="translate(0,100) skewX(-24) translate(0,-100)"/>
+</svg>
