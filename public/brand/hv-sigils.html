@@ -1,0 +1,241 @@
+<title>HyperVisuals — Four Sigils</title>
+<style>
+:root{
+  --ink:#14171A; --ink-soft:#565D63;
+  --paper:#EDEDEA; --rule:#CFD2CC;
+  --black:#000; --white:#FAFAF8; --volt:#CCFF00; --accent:#7E9E00;
+  --display:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#EAECE7;--ink-soft:#8D948C;--paper:#0B0D0F;--rule:#2A3036;--accent:#CCFF00;}
+}
+:root[data-theme="dark"]{--ink:#EAECE7;--ink-soft:#8D948C;--paper:#0B0D0F;--rule:#2A3036;--accent:#CCFF00;}
+:root[data-theme="light"]{--ink:#14171A;--ink-soft:#565D63;--paper:#EDEDEA;--rule:#CFD2CC;--accent:#7E9E00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.sheet{max-width:1000px;margin:0 auto;padding:clamp(24px,5vw,60px) clamp(18px,4vw,40px) 90px}
+
+.masthead{border-bottom:1.5px solid var(--ink);padding-bottom:20px;margin-bottom:28px}
+.slug{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:22px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,54px);line-height:.98;
+  letter-spacing:-.035em;margin:0 0 16px;text-wrap:balance;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--ink-soft)}
+.standfirst{max-width:58ch;margin:0;font-size:clamp(17px,2.1vw,19px)}
+
+.read{border-left:3px solid var(--accent);padding:16px 20px;margin:26px 0 44px;max-width:64ch}
+.read p{margin:0 0 10px}.read p:last-child{margin:0}
+.read strong{font-weight:600}
+
+.plate{margin-bottom:clamp(44px,7vw,76px)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:9px;margin-bottom:22px}
+.idx{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent)}
+.head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(19px,3vw,27px);letter-spacing:-.02em;margin:0}
+.axis{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-left:auto}
+.grid{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(280px,1.2fr);
+  gap:clamp(22px,4vw,42px);align-items:start}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+
+.tile{background:var(--black);border-radius:22%;display:flex;align-items:center;
+  justify-content:center;aspect-ratio:1;padding:6%}
+.tile svg{display:block;width:100%;height:auto;color:var(--white)}
+.strip{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:flex-end}
+.strip figure{margin:0;display:grid;justify-items:center;gap:6px}
+.strip .t{border-radius:22%;display:flex;align-items:center;justify-content:center}
+.strip .k{background:var(--black)} .strip .v{background:var(--volt)} .strip .w{background:var(--white)}
+.strip .k svg{color:var(--white)} .strip .v svg{color:var(--black)} .strip .w svg{color:var(--black)}
+.strip svg{display:block}
+.strip figcaption{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;color:var(--ink-soft)}
+
+.why{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);border-left:3px solid var(--accent);padding:2px 0 2px 13px;
+  margin:0 0 16px;line-height:1.85}
+.why b{color:var(--ink);font-weight:400}
+.rat p{margin:0 0 13px;max-width:50ch}
+.rat p:last-child{margin:0}
+.lede{font-size:19px;line-height:1.45}
+.lede strong{font-weight:600}
+
+.panel{border-top:1.5px solid var(--ink);padding-top:24px;margin-bottom:clamp(42px,7vw,72px)}
+.panel h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(19px,3.2vw,27px);letter-spacing:-.02em;margin:0 0 12px}
+.panel > p{max-width:58ch;margin:0 0 22px}
+.locks{display:grid;gap:0;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lock{display:flex;align-items:center;gap:20px;padding:20px 22px;background:var(--black)}
+.lock+.lock{border-top:1px solid #222}
+.lock svg{display:block;flex:none;color:var(--white)}
+.lock .wm{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(16px,2.6vw,23px);letter-spacing:-.02em;line-height:1;color:var(--white)}
+.lock .wm .sl{opacity:.4;font-weight:400;padding:0 .06em}
+.lock .wm .sub{opacity:.5}
+
+.verdict{border-top:1.5px solid var(--ink);padding-top:24px}
+.verdict h2{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(19px,3.2vw,27px);letter-spacing:-.02em;margin:0 0 16px}
+.verdict p{max-width:56ch}
+.pick{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--black);background:var(--volt);
+  padding:5px 10px;border-radius:1px;margin-bottom:12px}
+table{border-collapse:collapse;width:100%;margin:20px 0 6px;font-size:14.5px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:8px 14px 8px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);white-space:nowrap}
+td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="slug">The HyperVisuals Media Co. — Round 09 · Sigils</div>
+    <h1>Three shapes,<br>nothing else<em>.</em></h1>
+    <p class="standfirst">Not a letter with a treatment. A symbol you could scratch into a wall from memory.</p>
+  </header>
+
+  <div class="read">
+    <p><strong>What your reference is actually doing.</strong> Two wedges and a bar — three elements, mirror-symmetric, more empty space than mark. No letterform anywhere.</p>
+    <p>And it means something before you decide it does: <strong>two forces converging on a single line.</strong> Which is your business. Two hours of talk, compressed onto one axis.</p>
+    <p>That's the register these four work in. Every one is under five shapes.</p>
+  </div>
+
+  <div id="plates"></div>
+
+  <section class="panel">
+    <h2>As a lockup</h2>
+    <p>Symbol left, name right — the way a mark this reduced has to be introduced for its first year or two.</p>
+    <div class="locks" id="locks"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="pick">Recommendation — 01 Converge</span>
+    <h2>The one that's both</h2>
+    <p>Converge is the only mark here that reads as a symbol at a glance and resolves into an H when you look twice. You get the sigil you're drawn to and the letter that rolls up every Hyper brand — without choosing between them.</p>
+    <p>Axis is the purest and the closest to your reference. Frame is the most editorial — brackets are literally what you put around the part that matters. Stack is the most literal statement of what you do.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mark</th><th>Shapes</th><th>Reads as</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>01 Converge</td><td>4</td><td>Symbol first, H second</td><td>Neither reading is maximal</td></tr>
+          <tr><td>02 Axis</td><td>3</td><td>Pure convergence</td><td>Closest to the reference</td></tr>
+          <tr><td>03 Frame</td><td>5</td><td>Selection, framing, focus</td><td>No letter at all</td></tr>
+          <tr><td>04 Stack</td><td>11</td><td>Many resolving into one</td><td>Busiest; weakest at 16px</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg", VB="0 0 100 100";
+
+  function rect(x,y,w,h){return "M"+x+" "+y+"H"+(x+w)+"V"+(y+h)+"H"+x+"Z";}
+  function poly(p){return "M"+p.map(function(a){return a[0]+" "+a[1];}).join("L")+"Z";}
+
+  var MARKS=[
+    {id:"converge", name:"Converge", axis:"Symbol, then letter", n:4,
+     d:[rect(0,0,13,100), rect(87,0,13,100),
+        poly([[13,30],[13,70],[45,50]]), poly([[87,30],[87,70],[55,50]])],
+     why:"<b>Two posts</b> — the outer structure<br><b>Two wedges</b> — pointing in, stopping short<br><b>The gap</b> — where they don't quite meet",
+     copy:["Glance at it and it's a symbol. <strong>Look again and it's an H.</strong>",
+           "The posts are the piers; the two wedges are the crossbar, compressed to a point. It's the only mark on this page doing both jobs, which for a master brand across four products is the whole game.",
+           "The 10-unit gap at the centre is the mark. Close it and you have an arrow; leave it and you have a held tension."]},
+    {id:"axis", name:"Axis", axis:"Pure convergence", n:3,
+     d:[rect(45,8,10,84),
+        poly([[8,20],[8,44],[33,50],[8,56],[8,80],[36,58],[36,42]]),
+        poly([[92,20],[92,44],[67,50],[92,56],[92,80],[64,58],[64,42]])],
+     why:"<b>One line</b> — the through-line<br><b>Two brackets</b> — pointing at it from both sides",
+     copy:["Everything aimed at one vertical. <strong>Nothing else in the frame.</strong>",
+           "This is your reference's structure with the brackets rebuilt as solid arrowheads rather than open angles — heavier, more deliberate, less like a code symbol.",
+           "The most reduced thing here, and the most confident. It's also the closest to what you sent me, which is either the point or the problem."]},
+    {id:"frame", name:"Frame", axis:"Editorial selection", n:5,
+     d:[poly([[6,6],[38,6],[38,19],[19,19],[19,38],[6,38]]),
+        poly([[94,6],[62,6],[62,19],[81,19],[81,38],[94,38]]),
+        poly([[6,94],[38,94],[38,81],[19,81],[19,62],[6,62]]),
+        poly([[94,94],[62,94],[62,81],[81,81],[81,62],[94,62]]),
+        rect(44,34,12,32)],
+     why:"<b>Four corners</b> — the crop<br><b>One bar</b> — what survived the crop",
+     copy:["Brackets are what you put around <strong>the part that matters.</strong>",
+           "Four corner marks and the thing they've selected. That's your entire editorial job stated in five shapes — and it's the only mark here that says <em>judgement</em> rather than compression.",
+           "No letter in it anywhere. Strongest as a pure icon, weakest if you need the H to do the work."]},
+    {id:"stack", name:"Stack", axis:"Many into one", n:11,
+     d:(function(){
+        var out=[rect(46,10,8,80)], ys=[17,31,45,59,73], ends=[16,28,40,28,16];
+        ys.forEach(function(y,i){
+          out.push(rect(6,y,ends[i]-6,10));
+          out.push(rect(100-ends[i],y,ends[i]-6,10));
+        });
+        return out;
+      })(),
+     why:"<b>Five bars a side</b> — discrete, countable<br><b>One axis</b> — what they resolve into",
+     copy:["The wedges are built from <strong>separate bars, not solid triangles.</strong>",
+           "Because you don't compress continuously — you cut long content into discrete blocks and those blocks resolve into one image. The bar count is arbitrary here, so it never commits you to a format size.",
+           "The most literal of the four, and the busiest. It's the one that needs a second, simpler cut for small sizes."]}
+  ];
+
+  function svgFor(m,px){
+    var s=document.createElementNS(NS,"svg");
+    s.setAttribute("viewBox",VB); s.setAttribute("fill","none");
+    if(px){s.setAttribute("width",px);s.setAttribute("height",px);}
+    m.d.forEach(function(d){
+      var p=document.createElementNS(NS,"path");
+      p.setAttribute("d",d); p.setAttribute("fill","currentColor");
+      s.appendChild(p);
+    });
+    return s;
+  }
+
+  var SIZES=[{px:26,g:"k"},{px:26,g:"v"},{px:26,g:"w"},{px:16,g:"k"}];
+  var host=document.getElementById("plates");
+  MARKS.forEach(function(m,i){
+    var sec=document.createElement("section"); sec.className="plate";
+    var h=document.createElement("div"); h.className="head";
+    h.innerHTML='<span class="idx">0'+(i+1)+'</span><h2>'+m.name+'</h2>'+
+                '<span class="axis">'+m.n+' shapes — '+m.axis+'</span>';
+    sec.appendChild(h);
+
+    var g=document.createElement("div"); g.className="grid";
+    var L=document.createElement("div");
+    var t=document.createElement("div"); t.className="tile";
+    t.appendChild(svgFor(m)); L.appendChild(t);
+
+    var strip=document.createElement("div"); strip.className="strip";
+    SIZES.forEach(function(sz){
+      var fig=document.createElement("figure");
+      var box=document.createElement("div"); box.className="t "+sz.g;
+      var b=Math.round(sz.px*1.7);
+      box.style.width=b+"px"; box.style.height=b+"px";
+      box.appendChild(svgFor(m,sz.px));
+      var c=document.createElement("figcaption"); c.textContent=b+"px";
+      fig.appendChild(box); fig.appendChild(c); strip.appendChild(fig);
+    });
+    L.appendChild(strip); g.appendChild(L);
+
+    var R=document.createElement("div"); R.className="rat";
+    var w=document.createElement("p"); w.className="why"; w.innerHTML=m.why; R.appendChild(w);
+    m.copy.forEach(function(txt,j){
+      var p=document.createElement("p");
+      if(j===0) p.className="lede";
+      p.innerHTML=txt; R.appendChild(p);
+    });
+    g.appendChild(R); sec.appendChild(g); host.appendChild(sec);
+  });
+
+  var locks=document.getElementById("locks");
+  [["Visuals"],["Pod"],["Library"]].forEach(function(b){
+    var row=document.createElement("div"); row.className="lock";
+    row.appendChild(svgFor(MARKS[0],40));
+    var wm=document.createElement("div"); wm.className="wm";
+    wm.innerHTML='Hyper<span class="sl">/</span><span class="sub">'+b[0]+'</span>';
+    row.appendChild(wm); locks.appendChild(row);
+  });
+})();
+</script>

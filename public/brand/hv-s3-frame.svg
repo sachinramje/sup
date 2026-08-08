@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <path fill="currentColor" d="M6 6H38V19H19V38H6Z"/>
+  <path fill="currentColor" d="M94 6H62V19H81V38H94Z"/>
+  <path fill="currentColor" d="M6 94H38V81H19V62H6Z"/>
+  <path fill="currentColor" d="M94 94H62V81H81V62H94Z"/>
+  <path fill="currentColor" d="M44 34H56V66H44Z"/>
+</svg>

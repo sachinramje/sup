@@ -366,3 +366,43 @@ Black `#0C0E10` on volt `#CCFF00`; volt on black as the inverse.
 **Interlock.** The only one whose construction is discovered rather than imposed — there is
 no styling decision in it to date. Hexagon is the close second and the most immediately
 striking.
+
+---
+
+# Round 09 — sigils
+
+**Reference:** a `>|<`-style mark — two wedges and a bar, mirror-symmetric, more negative
+space than mark, no letterform. It means something before you decide it does: two forces
+converging on a single line.
+
+That reframes the whole brief. Every prior round produced a *letter with a treatment*.
+These are symbols — each under five shapes, each drawable from memory.
+
+| File | Mark | Shapes | Reads as |
+| --- | --- | --- | --- |
+| `hv-s1-converge.svg` | Converge | 4 | Symbol first, H second. **Recommended.** |
+| `hv-s2-axis.svg` | Axis | 3 | Pure convergence; closest to the reference |
+| `hv-s3-frame.svg` | Frame | 5 | Selection and framing; no letter at all |
+| `hv-s4-stack.svg` | Stack | 11 | Many discrete blocks resolving into one |
+
+`hv-sigils.html` shows all four on black, volt and white, at 44/27px.
+
+## Constants
+
+- **Converge** — posts 13 wide at both edges; two wedges with 40-unit bases on the post
+  inner edges, tips stopping 10 apart at centre. The gap is the mark: close it and it's
+  an arrow, leave it and it's held tension. Only mark here that reads as a symbol at a
+  glance and an H on second look.
+- **Axis** — centre bar 10×84; two solid arrowheads with a notched tail, tips 12 from the
+  bar. The reference's structure with the open angles rebuilt as solid heads.
+- **Frame** — four corner brackets (arm 32, thickness 13) inset 6, plus a 12×32 centre
+  bar. Brackets are what you put around the part that matters — editorial judgement rather
+  than compression.
+- **Stack** — centre bar 8×80; five bars a side, 10 thick, ending at 16/28/40/28/16. The
+  wedges are discrete bars rather than solid triangles because long content is cut into
+  blocks before it resolves. Bar count is arbitrary, so it commits to no format size.
+
+## Recommendation
+
+**Converge** — the only mark that gets the sigil quality without giving up the H that
+rolls every Hyper brand together.
